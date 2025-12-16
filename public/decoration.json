@@ -1,0 +1,316 @@
+[
+  {
+    "service_name": "Elegant Wedding Decoration",
+    "service_category": "Wedding Event",
+    "cost": 25000,
+    "unit": "per event",
+    "shortDescription": "Premium wedding stage setup with floral and lighting.",
+    "description": "A luxury wedding stage setup featuring premium flowers, modern lighting, elegant backdrop design, and premium aisle styling.",
+    "image": "https://i.ibb.co.com/FbShP7WW/wedding-stage.jpg",
+    "gallery": ["wedding1.jpg", "wedding2.jpg"],
+    "features": ["Flower backdrop", "LED lighting", "Stage structure"],
+    "rating": 4.8,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+  {
+    "service_name": "Birthday Balloon Decoration",
+    "service_category": "Birthday Party",
+    "cost": 7000,
+    "unit": "per event",
+    "shortDescription": "Colorful balloon decoration for birthdays.",
+    "description": "Fun and vibrant balloon decoration setup for birthday celebrations with themed color combinations.",
+    "image": "https://i.ibb.co.com/1f2zCNjC/birthday-party-2.jpg",
+    "gallery": ["balloon1.jpg"],
+    "features": ["Balloon arch", "Confetti balloons"],
+    "rating": 4.5,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+  {
+    "service_name": "Corporate Event Setup",
+    "service_category": "Corporate Event",
+    "cost": 30000,
+    "unit": "per event",
+    "shortDescription": "Professional decoration for corporate meetings.",
+    "description": "A polished and pErofessional event decoration setup designed for conferences, product launches, and business seminars.",
+    "image": "https://i.ibb.co.com/hFXjHXcF/corporate-img.jpg",
+    "gallery": ["corp1.jpg"],
+    "features": ["Stage setup", "Backdrop", "Lighting"],
+    "rating": 4.7,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+  {
+    "service_name": "Engagement Ceremony Decoration",
+    "service_category": "Social Event",
+    "cost": 18000,
+    "unit": "per event",
+    "shortDescription": "Classy backdrop with floral designs.",
+    "description": "Beautiful and elegant engagement stage decoration with pastel floral arrangements and lighting.",
+    "image": "https://i.ibb.co.com/mr6VGH7R/engagement.webp",
+    "gallery": ["engage1.jpg"],
+    "features": ["Floral backdrop", "LED lights"],
+    "rating": 4.6,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+  {
+    "service_name": "Mehendi Function Theme Decor",
+    "service_category": "Wedding Event",
+    "cost": 12000,
+    "unit": "per event",
+    "shortDescription": "Traditional mehendi decoration in vibrant colors.",
+    "description": "Colorful mehendi décor with yellow drapes, floral hangings, and artistic props.",
+    "image": "https://i.ibb.co.com/tpJ1cqxR/mehendi.jpg",
+    "gallery": ["https://i.ibb.co.com/FLsZZ009/mehendi-2.jpg","https://i.ibb.co.com/Zz3JVpn5/mehendi-3.jpg"],
+    "features": ["Traditional props", "Colorful setup"],
+    "rating": 4.7,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+  {
+    "service_name": "Anniversary Candlelight Setup",
+    "service_category": "Social Event",
+    "cost": 9000,
+    "unit": "per event",
+    "shortDescription": "Romantic candlelit and floral décor.",
+    "description": "A romantic surprise decoration featuring candles, rose petals, and fairy lights.",
+    "image": "https://i.ibb.co.com/PBK9HKf/candlelight.webp",
+    "gallery": ["https://i.ibb.co.com/XrmmrHk4/candlelight-2.webp","https://i.ibb.co.com/MkLbNtz5/candlelight-3.webp"],
+    "features": ["Candles", "Flowers", "LED lights"],
+    "rating": 4.4,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+  {
+  "service_name": "Corporate Conference Decoration",
+  "service_category": "Corporate Event",
+  "cost": 25000,
+  "unit": "per event",
+  "shortDescription": "Professional décor for corporate conferences.",
+  "description": "Elegant and professional conference decoration including stage backdrop, branding elements, seating arrangement styling, and lighting setup.",
+  "image": "https://i.ibb.co.com/xt3f8062/corporate.jpg",
+  "gallery": ["https://i.ibb.co.com/Jwyr15fr/conferance-2.jpg", "https://i.ibb.co.com/B5R73qXr/conferance-3.jpg"],
+  "features": ["Branded backdrop", "Stage lighting", "Seating décor"],
+  "rating": 4.7,
+  "createdByEmail": "afrinaswarna1999@gmail.com"
+},
+  {
+  "service_name": "Birthday Party Decoration",
+  "service_category": "Birthday Party",
+  "cost": 12000,
+  "unit": "per event",
+  "shortDescription": "Colorful and fun birthday party décor.",
+  "description": "Vibrant birthday party decoration with themed balloons, backdrop setup, and table styling suitable for kids and adults.",
+  "image": "https://i.ibb.co.com/wNNyX6Mw/birthday-big.avif",
+  "gallery": ["https://i.ibb.co.com/DH6ygY8F/birthday-big-2.avif", "https://i.ibb.co.com/TDXZRgw4/birthday-big-3.webp"],
+  "features": ["Theme-based balloons", "Backdrop decoration", "Table styling"],
+  "rating": 4.7,
+  "createdByEmail": "afrinaswarna1999@gmail.com"
+},
+{
+  "service_name": "Anniversary Celebration Decoration",
+  "service_category": "Social Event",
+  "cost": 18000,
+  "unit": "per event",
+  "shortDescription": "Elegant décor for anniversary celebrations.",
+  "description": "Romantic anniversary decoration with floral arrangements, customized backdrop, and ambient lighting for a memorable celebration.",
+  "image": "https://i.ibb.co.com/ymK4h0ZZ/anniverciry.jpg",
+  "gallery": ["https://i.ibb.co.com/nHjsH6s/anniversiry-party-4.jpg", "https://i.ibb.co.com/3yXrkdkm/anneversiry-party-5.jpg"],
+  "features": ["Floral décor", "Customized backdrop", "Ambient lighting"],
+  "rating": 4.9,
+  "createdByEmail": "afrinaswarna1999@gmail.com"
+},
+  {
+    "service_name": "Bridal Entry Path Decoration",
+    "service_category": "Wedding Event",
+    "cost": 14000,
+    "unit": "per event",
+    "shortDescription": "Floral and lighting walkway.",
+    "description": "An elegant walkway decorated with floral arches and warm lights for bride entry.",
+    "image": "https://i.ibb.co.com/pvzpN1J8/path-2.jpg",
+    "gallery": ["https://i.ibb.co.com/SDnPBvZp/entry-path.webp","https://i.ibb.co.com/1Jd3ypkk/entry-path-2.webp"],
+    "features": ["Floral arches", "LED lights"],
+    "rating": 4.9,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Garden Party Decor",
+    "service_category": "Social Event",
+    "cost": 11000,
+    "unit": "per event",
+    "shortDescription": "Decorative outdoor garden setup.",
+    "description": "A colorful outdoor setup perfect for gatherings and evening events.",
+    "image": "https://i.ibb.co.com/0jtckYGz/wedding2.jpg",
+    "gallery": ["https://i.ibb.co.com/mVGsjjPv/garden-party.avif","https://i.ibb.co.com/Cs4vxRng/garden-party-2.avif"],
+    "features": ["Outdoor lights", "Flower pots"],
+    "rating": 4.3,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Cultural Event Stage Setup",
+    "service_category": "Social Event",
+    "cost": 22000,
+    "unit": "per event",
+    "shortDescription": "Traditional cultural stage décor.",
+    "description": "A decorated stage setup tailored for cultural and festive performances.",
+    "image": "https://i.ibb.co.com/mFtTJCP9/cultural-event.jpg",
+    "gallery": ["https://i.ibb.co.com/GfccksQQ/cultural-2.jpg","https://i.ibb.co.com/whc5ZdZV/cultural-3.jpg"],
+    "features": ["Traditional props", "Stage backdrop"],
+    "rating": 4.6,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Outdoor Wedding Mandap",
+    "service_category": "Wedding Event",
+    "cost": 35000,
+    "unit": "per event",
+    "shortDescription": "Classy mandap setup with flowers.",
+    "description": "A premium mandap design decorated with vibrant flowers and fabrics.",
+    "image": "https://i.ibb.co.com/SXtgHB3H/bridal-path.jpg",
+    "gallery": ["https://i.ibb.co.com/Dgk2595L/outdoor-weeding.avif","https://i.ibb.co.com/Z1myv95m/outdoor-wedding-2.avif"],
+    "features": ["Flower canopy", "Decorated pillars"],
+    "rating": 4.8,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  
+
+  {
+    "service_name": "Corporate Award Ceremony Decor",
+    "service_category": "Corporate Event",
+    "cost": 25000,
+    "unit": "per event",
+    "shortDescription": "Premium ceremony stage setup.",
+    "description": "A grand corporate award stage decorated with LED screens, podium, and brand-themed colors.",
+    "image": "https://i.ibb.co.com/gMcXML8K/corporate-seminar.jpg",
+    "gallery": ["https://i.ibb.co.com/wZSjyfnR/award.jpg","https://i.ibb.co.com/60PZ8X1D/award2.jpg"],
+    "features": ["LED screen", "Brand theme décor"],
+    "rating": 4.7,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Photography Backdrop Setup",
+    "service_category": "Home Service",
+    "cost": 8000,
+    "unit": "per event",
+    "shortDescription": "Stylish photography background setup.",
+    "description": "A decorative photo booth backdrop with themed props and styling.",
+    "image": "https://i.ibb.co.com/CrFw7kP/photo-shoot.avif",
+    "gallery": ["https://i.ibb.co.com/pB1RchJR/photo-back.avif","https://i.ibb.co.com/Q7mjWzdY/backdrop.avif"],
+    "features": ["Props", "Backdrop stand"],
+    "rating": 4.5,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Conference Hall Decoration",
+    "service_category": "Corporate Event",
+    "cost": 18000,
+    "unit": "per event",
+    "shortDescription": "Professional decoration for conferences.",
+    "description": "Conference space decoration with banners, lighting, and seating arrangement styling.",
+    "image": "https://i.ibb.co.com/WpP8mp1H/conferance-hall.jpg",
+    "gallery": ["https://i.ibb.co.com/G4jM16Cf/photo-2.jpg","https://i.ibb.co.com/Swrk0zp1/photo-3.jpg"],
+    "features": ["Banner stand", "Stage backdrop"],
+    "rating": 4.6,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Luxury Wedding Entrance Gate",
+    "service_category": "Wedding Event",
+    "cost": 28000,
+    "unit": "per event",
+    "shortDescription": "Floral and lighting decorated entrance.",
+    "description": "A premium entrance gate with heavy florals and warm LED lights.",
+    "image": "https://i.ibb.co.com/xqYy8S0S/wedding-party.jpg",
+    "gallery": ["https://i.ibb.co.com/DgPRqjnK/wedding-4.jpg",""],
+    "features": ["Floral arch", "Warm lights"],
+    "rating": 4.9,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Kids Theme Birthday Decor",
+    "service_category": "Birthday Party",
+    "cost": 12000,
+    "unit": "per event",
+    "shortDescription": "Cartoon-themed decoration.",
+    "description": "Kids birthday decoration with animated characters, themed balloons, and table setup.",
+    "image": "https://i.ibb.co.com/qFdx8SJs/first-birthday-party-1.jpg",
+    "gallery": ["https://i.ibb.co.com/676YjTbd/theme.avif","https://i.ibb.co.com/JRxcQdz7/theme-2.avif"],
+    "features": ["Theme balloons", "Character standees"],
+    "rating": 4.6,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Minimalist Living Room Decoration",
+    "service_category": "Home Service",
+    "cost": 10000,
+    "unit": "per room",
+    "shortDescription": "Modern minimalist styling.",
+    "description": "Aesthetic living room décor with soft lighting, modern furniture placement, and balanced color themes.",
+    "image": "https://i.ibb.co.com/zVfCpcr9/living-room.avif",
+    "gallery": ["https://i.ibb.co.com/KcYpKJNK/living-room-2.avif","https://i.ibb.co.com/MkKxYpZq/living-room-3.avif"],
+    "features": ["Soft lighting", "Wall frames"],
+    "rating": 4.7,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Luxury Bedroom Makeover",
+    "service_category": "Home Service",
+    "cost": 20000,
+    "unit": "per room",
+    "shortDescription": "Premium bedroom décor.",
+    "description": "A luxury bedroom makeover including lighting, drapes, bedding, and elegant props.",
+    "image": "https://i.ibb.co.com/s9dSp6vM/bedroom.avif",
+    "gallery": ["https://i.ibb.co.com/hRFQtBkk/bedroom-2.avif","https://i.ibb.co.com/CpPyxJgw/bedroom-3.avif"],
+    "features": ["LED lights", "Curtains"],
+    "rating": 4.9,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Kids Study Room Decoration",
+    "service_category": "Home Service",
+    "cost": 12000,
+    "unit": "per room",
+    "shortDescription": "Educational and fun room décor.",
+    "description": "Colorful study room design featuring motivational frames, desk décor, and soft lighting.",
+    "image": "https://i.ibb.co.com/hJBKQdQv/kid-study.jpg",
+    "gallery": ["https://i.ibb.co.com/qM8MNV9Z/kid-study-2.jpg","https://i.ibb.co.com/SD6q9R3k/kid-study-3.jpg"],
+    "features": ["Wall art", "Bookshelf decor"],
+    "rating": 4.5,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Home Photo Wall Setup",
+    "service_category": "Home Service",
+    "cost": 6000,
+    "unit": "per wall",
+    "shortDescription": "Creative photo gallery wall.",
+    "description": "A beautiful family photo wall with frames, fairy lights, and decorative accents.",
+    "image": "https://i.ibb.co.com/3YyZT13n/photo-wall.webp",
+    "gallery": ["https://i.ibb.co.com/HDQC0Tsz/photo-wall-2.webp","https://i.ibb.co.com/k2Sm6k6F/photo-wall-3.jpg"],
+    "features": ["Fairy lights", "Frames"],
+    "rating": 4.4,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  },
+
+  {
+    "service_name": "Bedroom Romantic Surprise Setup",
+    "service_category": "Home Service",
+    "cost": 8000,
+    "unit": "per room",
+    "shortDescription": "Romantic balloons and lights.",
+    "description": "A romantic room décor setup with balloons, rose petals, candles, and elegant lighting.",
+    "image": "https://i.ibb.co.com/SwZ745Cf/Surprise.webp",
+    "gallery": ["https://i.ibb.co.com/3YL9B77F/surprise-2.webp","https://i.ibb.co.com/xSdG0pkM/surprise-3.webp"],
+    "features": ["Rose petals", "Balloons"],
+    "rating": 4.8,
+    "createdByEmail": "afrinaswarna1999@gmail.com"
+  }
+]

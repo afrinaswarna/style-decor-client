@@ -1,14 +1,22 @@
 import React from "react";
 import Logo from "../Shared/Logo";
 import { Link, NavLink } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
+  const {user}= useAuth()
 
     const links = <>
     <li><NavLink to='/'>Home</NavLink></li>
     <li><NavLink to='/services'>Services</NavLink></li>
     <li><NavLink to='/about'>About</NavLink></li>
     <li><NavLink to='/contact'>Contact</NavLink></li>
+
+    {
+      user&&<>
+       <li><NavLink to='/contact'>Dashboard</NavLink></li> </>
+
+    }
     </>
   return (
     <div className="flex items-center justify-center navbar bg-base-100 shadow-sm p-4 flex-col md:flex-row space-y-3">
@@ -49,7 +57,7 @@ const Navbar = () => {
        <div className="text-md font-medium">
          <Link>Log In</Link>
          <span>/</span>
-         <Link>Sign Up</Link>
+         <Link to='/register'>Sign Up</Link>
        </div>
 
        <Link className="btn">Become a Decorator</Link>

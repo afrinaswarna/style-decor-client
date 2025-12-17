@@ -4,6 +4,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router";
 
 const Services = () => {
   const axiosSecure = useAxiosSecure();
@@ -120,9 +121,9 @@ const Services = () => {
                 </p>
                 <p className="font-semibold">৳ {service.cost}</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary btn-sm">
-                    Book Now
-                  </button>
+                  <Link to={`/service-detail/${service._id}`} className="btn btn-primary btn-sm">
+                   Service Detail
+                  </Link>
                 </div>
               </div>
             </div>

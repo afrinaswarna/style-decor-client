@@ -7,6 +7,7 @@ import Contact from "../Pages/Contact/Contact";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
+import ServiceDetail from "../Pages/ServiceDetail/ServiceDetail";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
             {
                path:'services',
                 Component:Services
+            },
+            {
+                path:'service-detail/:id',
+                Component:ServiceDetail
             },
             {
                path:'about',

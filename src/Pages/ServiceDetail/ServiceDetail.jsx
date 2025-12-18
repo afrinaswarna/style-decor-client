@@ -62,7 +62,7 @@ const ServiceDetails = () => {
       if (result.isConfirmed) {
         axiosSecure.post("/bookings", booking).then((res) => {
           console.log("after saving data", res.data);
-          navigate("/dashboard/my-parcels");
+          navigate("/dashboard/my-booking");
 
           Swal.fire({
             position: "top-end",

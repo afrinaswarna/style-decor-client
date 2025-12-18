@@ -14,7 +14,7 @@ const navigate = useNavigate()
 
     {
       user&&<>
-       <li><NavLink to='/contact'>Dashboard</NavLink></li> </>
+       <li><NavLink to='/dashboard'>Dashboard</NavLink></li> </>
 
     }
     </>

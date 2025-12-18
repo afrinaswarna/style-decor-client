@@ -8,6 +8,10 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import ServiceDetail from "../Pages/ServiceDetail/ServiceDetail";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import DashboardHome from "../Pages/Dashboard/DashboardHome";
+import MyBookings from "../Pages/MyBookings/MyBookings";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -26,6 +30,7 @@ export const router = createBrowserRouter([
                 path:'service-detail/:id',
                 Component:ServiceDetail
             },
+            
             {
                path:'about',
                 Component:About
@@ -51,5 +56,38 @@ export const router = createBrowserRouter([
             }
         ]
 
-    }
+    },
+    
+    {
+    path:'dashboard',
+    element:<PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+    children:[
+      {
+        index:true,
+        Component:DashboardHome
+
+      },
+      {
+        path:'my-booking',
+        Component:MyBookings
+      },
+      {
+        path:'payment/:parcelId',
+        // Component:Payment
+      },
+      {
+        path:'payment-history',
+        // Component:PaymentHistory
+
+      },
+      {
+        path:'payment-success',
+        // Component:PaymentSuccess
+      },
+      {
+        path:'payment-cancelled',
+        // Component:PaymentCancelled
+      },
+]}
+
 ])

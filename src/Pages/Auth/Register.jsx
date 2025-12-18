@@ -1,11 +1,11 @@
-
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import SocialLogin from "./SocialLogin";
-// import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const {
@@ -14,72 +14,72 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-   const { registerUser,updataUserProfile } = useAuth();
-//   const axiosSecure = useAxiosSecure()
- const navigate = useNavigate()
-    const location = useLocation()
+  const { registerUser, updataUserProfile } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const location = useLocation();
   const handleRegistration = (data) => {
-    console.log(data)
-    const profileImage = data.photo[0]
-    registerUser(data.email, data.password)
-      .then(() => {
-      
-        const formData = new FormData()
-        formData.append('image',profileImage)
-        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOST_KEY}`
+    console.log(data);
+    const profileImage = data.photo[0];
+    registerUser(data.email, data.password).then(() => {
+      const formData = new FormData();
+      formData.append("image", profileImage);
+      const image_API_URL = `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_IMAGE_HOST_KEY
+      }`;
 
-        axios.post(image_API_URL,formData)
-        .then(res=>{
-          
-            const photoURL = res.data.data.url
+      axios
+        .post(image_API_URL, formData)
+        .then((res) => {
+          const photoURL = res.data.data.url;
 
-            
-            // const userInfo ={
-            //   email: data.email,
-            //   displayName:data.name,
-            //     photoURL:photoURL
-
-            // }
-            // useAxiosSecure.post('/user',userInfo)
-            // .then((res)=>{
-            //   if(res.data.insertedId){
-            
-            //     
-            // }
+          const userInfo = {
+            email: data.email,
+            displayName: data.name,
+            photoURL: photoURL,
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User have been created",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
 
             const userProfile = {
-                displayName:data.name,
-                photoURL:photoURL
-            }
+              displayName: data.name,
+              photoURL: photoURL,
+            };
             updataUserProfile(userProfile)
-            .then(()=>{
-             
-               navigate(location.state||'/')
+              .then(() => {
+                navigate(location.state || "/");
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+          });
 
-            })
-            .catch(e=>{
-                console.log(e)
-            })
-              }
 
-            )
-            
-        // }).catch(e=>{
-        //     console.log(e)
-        // })
-       
-       
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    });
   };
   return (
     <div className="flex">
-      <div><img src="https://i.ibb.co.com/B2Bf3dq4/Homepage-Assembly.webp" alt="" /></div>
+      <div>
+        <img
+          src="https://i.ibb.co.com/B2Bf3dq4/Homepage-Assembly.webp"
+          alt=""
+        />
+      </div>
       <div className=' className="card w-full max-w-sm shrink-0 shadow-2xl my-20 p-2'>
         <h2 className="text-4xl font-bold  mt-4">Create an Account</h2>
-       
+
         <form className="card-body" onSubmit={handleSubmit(handleRegistration)}>
           <fieldset className="fieldset">
             <label className="label">Name</label>
@@ -151,7 +151,6 @@ const Register = () => {
               </Link>
             </p>
           </fieldset>
-          <SocialLogin></SocialLogin>
         </form>
       </div>
     </div>

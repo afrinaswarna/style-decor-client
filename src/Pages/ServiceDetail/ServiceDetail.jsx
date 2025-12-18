@@ -1,18 +1,22 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useRef, useState } from "react";
+import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
-export default function ServiceDetails() {
+const ServiceDetails = () => {
   const { id } = useParams();
-
+  const { register, handleSubmit } = useForm();
+  // console.log(id)
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const bookingModalRef = useRef(null);
   //   const [open, setOpen] = useState(false);
   const [activeImg, setActiveImg] = useState(null);
-  console.log(user);
+  // console.log(user);
   const { data: service = {}, isLoading } = useQuery({
     queryKey: ["service", id],
     queryFn: async () => {
@@ -20,36 +24,59 @@ export default function ServiceDetails() {
       return res.data;
     },
   });
-
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
-
+  // console.log(service);
+  
   const handleOpenModal = () => {
-    bookingModalRef.current.showModal();
+    bookingModalRef.current?.showModal();
   };
   const handleCloseModal = () => {
-    bookingModalRef.current.close();
+    bookingModalRef.current?.close();
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
+  const handleBookings = async (data) => {
+   
+    bookingModalRef.current?.close();
 
     const booking = {
-      userName: user.displayName,
-      userEmail: user.email,
+      userName: user?.displayName,
+      userEmail: user?.email,
       serviceId: service._id,
       serviceName: service.service_name,
       serviceCategory: service.service_category,
       price: service.cost,
-      bookingDate: form.date.value,
-      location: form.location.value,
+      
+      location: data.location,
       status: "pending",
       createdAt: new Date(),
     };
 
-    await axiosSecure.post("/bookings", booking);
+    
+    Swal.fire({
+      title: "Agree with the cost?",
+      text: `You will be charged ${service.cost} taka!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirm and continue payment",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.post("/bookings", booking).then((res) => {
+          console.log("after saving data", res.data);
+          navigate("/dashboard/my-parcels");
 
-    alert("Booking successful!");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Booking order has been taken",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
+      }
+    });
   };
+  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -92,8 +119,8 @@ export default function ServiceDetails() {
           <p className="mb-4">⭐ {service.rating}</p>
 
           <button
-            onClick={() => handleOpenModal(service)}
-            className="px-6 py-3 rounded-xl bg-primary text-white hover:opacity-90"
+            onClick={() => handleOpenModal()}
+            className="px-6 py-3 rounded-xl btn-primary text-white hover:opacity-90"
           >
             Book Now
           </button>
@@ -126,13 +153,21 @@ export default function ServiceDetails() {
             Press ESC key or click the button below to close
           </p>
           <div className="modal-action">
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <input value={user.displayName} readOnly className="input" />
-              <input value={user.email} readOnly className="input" />{" "}
-              <input value={service.service_name} readOnly className="input" />
-              <input name="date" type="date" required className="input" />
+            <form onSubmit={handleSubmit(handleBookings)} className="space-y-3">
               <input
-                name="location"
+                defaultValue={user?.displayName}
+                readOnly
+                className="input"
+              />
+              <input defaultValue={user?.email} readOnly className="input" />{" "}
+              <input
+                defaultValue={service.service_name}
+                readOnly
+                className="input"
+              />
+              <input
+                type="text"
+                {...register("location")}
                 placeholder="Event location"
                 required
                 className="input"
@@ -145,7 +180,10 @@ export default function ServiceDetails() {
                 >
                   Cancel
                 </button>
-                <button className="px-4 py-2 rounded-lg bg-primary text-white">
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-lg btn-primary text-white"
+                >
                   Confirm
                 </button>
               </div>
@@ -155,4 +193,5 @@ export default function ServiceDetails() {
       </dialog>
     </div>
   );
-}
+};
+export default ServiceDetails;

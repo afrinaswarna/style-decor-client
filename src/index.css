@@ -8,3 +8,7 @@
   --color-primary: #0F766E;
   --color-secondary: #03373D;
 }
+
+.btn-primary {
+  @apply bg-primary text-white rounded-xl px-6 py-3 hover:opacity-90;
+}

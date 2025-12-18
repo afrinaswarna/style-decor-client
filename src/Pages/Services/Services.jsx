@@ -121,7 +121,7 @@ const Services = () => {
                 </p>
                 <p className="font-semibold">৳ {service.cost}</p>
                 <div className="card-actions justify-end">
-                  <Link to={`/service-detail/${service._id}`} className="btn btn-primary btn-sm">
+                  <Link to={`/service-detail/${service._id}`} className="btn btn-primary ">
                    Service Detail
                   </Link>
                 </div>

@@ -105,6 +105,7 @@ const navigate = useNavigate()
             >
               Login
             </NavLink>
+            <span>/</span>
 
             <NavLink
               to="/register"

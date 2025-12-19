@@ -12,6 +12,8 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import DashboardHome from "../Pages/Dashboard/DashboardHome";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import PaymentSuccess from "../Pages/Dashboard/PaymentSuccess";
+import PaymentCancelled from "../Pages/Dashboard/PaymentCancelled";
 
 export const router = createBrowserRouter([
     {
@@ -82,11 +84,11 @@ export const router = createBrowserRouter([
       },
       {
         path:'payment-success',
-        // Component:PaymentSuccess
+        Component:PaymentSuccess
       },
       {
         path:'payment-cancelled',
-        // Component:PaymentCancelled
+        Component:PaymentCancelled
       },
 ]}
 

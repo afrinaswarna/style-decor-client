@@ -56,14 +56,15 @@ const handleDelete = (id) => {
   };
 
   const handlePayment = async (booking) => {
-    console.log(booking)
+    // console.log(booking)
     const paymentInfo = {
       price: booking.price,
       bookingId: booking._id,
       serviceName: booking.serviceName,
       userEmail: booking.userEmail,
     }
-     const res = await axiosSecure.post("/payment-checkout-session", paymentInfo)
+     const res = await axiosSecure.post("/servicePayment-checkout-session", paymentInfo)
+    //  console.log(res.data)
      
     
     window.location.assign(res.data.url);
@@ -94,7 +95,7 @@ const handleDelete = (id) => {
                 <td>{booking.price}</td>
                 <td>
                   {booking.paymentStatus === "paid" ? (
-                    <span className="text-pri">Paid</span>
+                    <span className="text-primary">Paid</span>
                   ) : (
                     <button
                       onClick={() => handlePayment(booking)}

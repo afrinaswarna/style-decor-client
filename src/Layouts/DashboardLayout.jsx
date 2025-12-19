@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaCreditCard } from 'react-icons/fa6';
 import { MdOutlineEventNote } from 'react-icons/md';
 import { Link, Outlet } from 'react-router';
 
@@ -39,6 +40,13 @@ const DashboardLayout = () => {
             {/* Home icon */}
             <MdOutlineEventNote />
             <span className="is-drawer-close:hidden">My Bookings</span>
+          </Link>
+        </li>
+        <li>
+          <Link to='/dashboard/payment-history' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment-history">
+            {/* Home icon */}
+             <FaCreditCard />
+            <span className="is-drawer-close:hidden">Payment History</span>
           </Link>
         </li>
 

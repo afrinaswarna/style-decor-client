@@ -7,7 +7,7 @@ const PaymentSuccess = () => {
     const sessionId = searchParams.get('session_id')
     const [paymentInfo,setPaymentInfo]= useState({})
     const axiosSecure = useAxiosSecure()
-    console.log(sessionId)
+    // console.log(sessionId)
     useEffect(()=>{
         if(sessionId){
             axiosSecure.patch(`/payment-success?session_id=${sessionId}`)

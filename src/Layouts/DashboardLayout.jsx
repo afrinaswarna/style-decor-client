@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUser } from 'react-icons/fa';
+import { FaUser, FaUsers } from 'react-icons/fa';
 import { FaCreditCard } from 'react-icons/fa6';
 import { MdOutlineEventNote } from 'react-icons/md';
 import { Link, Outlet } from 'react-router';
@@ -55,6 +55,13 @@ const DashboardLayout = () => {
             {/* Home icon */}
              <FaUser></FaUser>
             <span className="is-drawer-close:hidden">Approve Decorator</span>
+          </Link>
+        </li>
+        <li>
+          <Link to='/dashboard/user-management' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="user-management">
+            {/* Home icon */}
+             <FaUsers />
+            <span className="is-drawer-close:hidden">User Management</span>
           </Link>
         </li>
 

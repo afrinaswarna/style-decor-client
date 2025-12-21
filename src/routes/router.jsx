@@ -17,6 +17,7 @@ import PaymentCancelled from "../Pages/Dashboard/PaymentCancelled";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 import Decorator from "../Pages/Decorator/Decorator";
 import ApproveDecorator from "../Pages/Dashboard/ApproveDecorator";
+import UserManagement from "../Pages/Dashboard/UserManagement";
 
 export const router = createBrowserRouter([
     {
@@ -100,6 +101,10 @@ export const router = createBrowserRouter([
         path:'approve-decorator',
         element:<ApproveDecorator></ApproveDecorator>
 
+      },
+      {
+        path:'user-management',
+        element:<UserManagement></UserManagement>
       }
 ]}
 

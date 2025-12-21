@@ -117,7 +117,7 @@ const navigate = useNavigate()
         )}
       </div>
 
-       <Link className="btn">Become a Decorator</Link>
+       <Link to='/decorator' className="btn btn-primary">Become a Decorator</Link>
       </div>
     </div>
   );

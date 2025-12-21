@@ -15,6 +15,8 @@ import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import PaymentSuccess from "../Pages/Dashboard/PaymentSuccess";
 import PaymentCancelled from "../Pages/Dashboard/PaymentCancelled";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
+import Decorator from "../Pages/Decorator/Decorator";
+import ApproveDecorator from "../Pages/Dashboard/ApproveDecorator";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +33,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'service-detail/:id',
+                
                 Component:ServiceDetail
             },
             
@@ -41,6 +44,11 @@ export const router = createBrowserRouter([
             {
               path:'contact',
                 Component:Contact
+            },
+            {
+              path:'decorator',
+              loader:()=>fetch('/serviceCoverage.json').then(res=>res.json()),
+             element:<PrivateRoutes><Decorator></Decorator></PrivateRoutes>
             }
         ]
         
@@ -74,10 +82,7 @@ export const router = createBrowserRouter([
         path:'my-booking',
         Component:MyBookings
       },
-      {
-        path:'payment/:parcelId',
-        // Component:Payment
-      },
+     
       {
         path:'payment-history',
         Component:PaymentHistory
@@ -91,6 +96,11 @@ export const router = createBrowserRouter([
         path:'payment-cancelled',
         Component:PaymentCancelled
       },
+      {
+        path:'approve-decorator',
+        element:<ApproveDecorator></ApproveDecorator>
+
+      }
 ]}
 
 ])

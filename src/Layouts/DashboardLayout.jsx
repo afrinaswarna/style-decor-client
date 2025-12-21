@@ -3,8 +3,10 @@ import { FaUser, FaUsers } from 'react-icons/fa';
 import { FaCreditCard } from 'react-icons/fa6';
 import { MdOutlineEventNote } from 'react-icons/md';
 import { Link, Outlet } from 'react-router';
+import useRole from '../hooks/useRole';
 
 const DashboardLayout = () => {
+const {role} = useRole();
     return (
         <div className="drawer lg:drawer-open">
   <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -50,7 +52,9 @@ const DashboardLayout = () => {
             <span className="is-drawer-close:hidden">Payment History</span>
           </Link>
         </li>
-        <li>
+     {
+      role === 'admin' && <>
+         <li>
           <Link to='/dashboard/approve-decorator' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="approve-decorator">
             {/* Home icon */}
              <FaUser></FaUser>
@@ -64,6 +68,8 @@ const DashboardLayout = () => {
             <span className="is-drawer-close:hidden">User Management</span>
           </Link>
         </li>
+      </>
+     }
 
         
         <li>

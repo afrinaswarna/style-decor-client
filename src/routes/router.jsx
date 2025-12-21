@@ -17,96 +17,103 @@ import PaymentCancelled from "../Pages/Dashboard/PaymentCancelled";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 import Decorator from "../Pages/Decorator/Decorator";
 import ApproveDecorator from "../Pages/Dashboard/ApproveDecorator";
-import UserManagement from "../Pages/Dashboard/UserManagement";
 import AdminRoutes from "../PrivateRoutes/AdminRoutes";
+import UsersManagement from "../Pages/Dashboard/UsersManagement";
+
+
 
 export const router = createBrowserRouter([
-    {
-        path:'/',
-        Component:RootLayout,
-        children:[
-            {
-                index:true,
-                Component:Home
-            },
-            {
-               path:'services',
-                Component:Services
-            },
-            {
-                path:'service-detail/:id',
-                
-                Component:ServiceDetail
-            },
-            
-            {
-               path:'about',
-                Component:About
-            },
-            {
-              path:'contact',
-                Component:Contact
-            },
-            {
-              path:'decorator',
-              loader:()=>fetch('/serviceCoverage.json').then(res=>res.json()),
-             element:<PrivateRoutes><Decorator></Decorator></PrivateRoutes>
-            }
-        ]
+  {
+    path: "/",
+    Component: RootLayout,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "services",
+        Component: Services,
+      },
+      {
+        path: "service-detail/:id",
+
+        Component: ServiceDetail,
+      },
+
+      {
+        path: "about",
+        Component: About,
+      },
+      {
+        path: "contact",
+        Component: Contact,
+      },
+      {
+        path: "decorator",
+        loader: () => fetch("/serviceCoverage.json").then((res) => res.json()),
+        element: (
+          <PrivateRoutes>
+            <Decorator></Decorator>
+          </PrivateRoutes>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/",
+    Component: AuthLayout,
+    children: [
+      {
+        path: "login",
+        Component: Login,
+      },
+      {
+        path: "register",
+        Component: Register,
+      },
+    ],
+  },
+
+  {
+    path: "dashboard",
+    element: 
+      <PrivateRoutes>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoutes>
+    ,
+    children: [
+      {
+        index: true,
+        Component: DashboardHome,
+      },
+      {
+        path: "my-booking",
+        Component: MyBookings,
+      },
+
+      {
+        path: "payment-history",
+        Component: PaymentHistory,
+      },
+      {
+        path: "payment-success",
+        Component: PaymentSuccess,
+      },
+      {
+        path: "payment-cancelled",
+        Component: PaymentCancelled,
+      },
+      {
+        path: "approve-decorator",
         
-    },
-    {
-        path:'/',
-        Component:AuthLayout,
-        children:[
-            {
-                path:'login',
-                Component:Login
-            },
-            {
-                path:'register',
-                Component:Register
-            }
-        ]
-
-    },
-    
-    {
-    path:'dashboard',
-    element:<PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
-    children:[
-      {
-        index:true,
-        Component:DashboardHome
-
-      },
-      {
-        path:'my-booking',
-        Component:MyBookings
-      },
-     
-      {
-        path:'payment-history',
-        Component:PaymentHistory
-
-      },
-      {
-        path:'payment-success',
-        Component:PaymentSuccess
-      },
-      {
-        path:'payment-cancelled',
-        Component:PaymentCancelled
-      },
-      {
-        path:'approve-decorator',
         element:<AdminRoutes><ApproveDecorator></ApproveDecorator></AdminRoutes>
-
       },
       {
-        path:'user-management',
-        element:<AdminRoutes><UserManagement></UserManagement></AdminRoutes>
-      }
-]}
+        path: "users-management",
 
-])
+        element:<AdminRoutes><UsersManagement></UsersManagement></AdminRoutes>
+      },
+    ],
+  },
+]);

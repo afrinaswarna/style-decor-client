@@ -1,24 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { FaUserShield, FaUserSlash } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-const UserManagement = () => {
+import { FaUserShield, FaUserSlash } from "react-icons/fa";
+
+const UsersManagement = () => {
   const axiosSecure = useAxiosSecure();
-//   const [searchUser,setSearchUser] = useState('')
+    const [searchUser,setSearchUser] = useState('')
   const { refetch, data: users = [] } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users",searchUser],
     queryFn: async () => {
-      const res = await axiosSecure.get('/users');
-      console.log(res.data);
+      const res = await axiosSecure.get(`/users?searchUser=${searchUser}`);
+    //   console.log(res.data);
       return res.data;
     },
   });
-
   const handleMakeAdmin = (user) => {
     const roleInfo = { role: "admin" };
     axiosSecure.patch(`/users/${user._id}`, roleInfo).then((res) => {
-        console.log(res.data)
+    //   console.log(res.data);
       if (res.data.modifiedCount) {
         refetch();
         Swal.fire({
@@ -70,7 +70,7 @@ const UserManagement = () => {
             </g>
           </svg>
           <input 
-          
+          onChange={(e)=>setSearchUser(e.target.value)}
           type="search" 
           className="grow" 
           placeholder="Search user" />
@@ -143,4 +143,4 @@ const UserManagement = () => {
   );
 };
 
-export default UserManagement;
+export default UsersManagement;

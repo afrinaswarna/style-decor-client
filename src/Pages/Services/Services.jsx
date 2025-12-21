@@ -30,7 +30,7 @@ const Services = () => {
     return ["all", ...new Set(types)];
   }, [services]);
 
-  // 🎯 Filtered services
+  
   const filteredServices = useMemo(() => {
     return services.filter(service => {
       const matchName = service.service_name

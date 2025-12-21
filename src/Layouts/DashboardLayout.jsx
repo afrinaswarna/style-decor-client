@@ -62,10 +62,10 @@ const {role} = useRole();
           </Link>
         </li>
         <li>
-          <Link to='/dashboard/user-management' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="user-management">
+          <Link to='/dashboard/users-management' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="users-management">
             {/* Home icon */}
              <FaUsers />
-            <span className="is-drawer-close:hidden">User Management</span>
+            <span className="is-drawer-close:hidden">Users Management</span>
           </Link>
         </li>
       </>

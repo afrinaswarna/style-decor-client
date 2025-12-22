@@ -69,7 +69,7 @@ const Login = () => {
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
-          <button className="btn bg-primary mt-4">Login</button>
+          <button type="submit" className="btn bg-primary mt-4">Login</button>
           <p>
             New to Zap Shift?{" "}
             <Link to="/register" state={location.state} className="text-blue-600 hover:underline">

@@ -9,13 +9,13 @@ import { Link } from "react-router";
 const Services = () => {
   const axiosSecure = useAxiosSecure();
 
-  // 🔍 Filter states
+
   const [searchText, setSearchText] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [minBudget, setMinBudget] = useState("");
   const [maxBudget, setMaxBudget] = useState("");
 
-  // 📡 Fetch services
+ 
   const { data: services = [], isLoading } = useQuery({
     queryKey: ["services"],
     queryFn: async () => {
@@ -24,7 +24,7 @@ const Services = () => {
     },
   });
 
-  // 🧠 Get unique service types
+  
   const serviceTypes = useMemo(() => {
     const types = services.map(service => service.service_category);
     return ["all", ...new Set(types)];
@@ -58,10 +58,10 @@ const Services = () => {
   return (
     <div className="p-4 space-y-6">
 
-      {/* 🔎 Filters Section */}
+    
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-base-200 p-4 rounded-lg">
 
-        {/* Search */}
+      
         <input
           type="text"
           placeholder="Search service name..."
@@ -70,7 +70,7 @@ const Services = () => {
           onChange={(e) => setSearchText(e.target.value)}
         />
 
-        {/* Service Type */}
+  
         <select
           className="select select-bordered w-full"
           value={selectedType}
@@ -83,7 +83,6 @@ const Services = () => {
           ))}
         </select>
 
-        {/* Min Budget */}
         <input
           type="number"
           placeholder="Min Budget"
@@ -92,7 +91,7 @@ const Services = () => {
           onChange={(e) => setMinBudget(e.target.value)}
         />
 
-        {/* Max Budget */}
+     
         <input
           type="number"
           placeholder="Max Budget"
@@ -102,7 +101,7 @@ const Services = () => {
         />
       </div>
 
-      {/* 🧾 Services Grid */}
+     
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredServices.length > 0 ? (
           filteredServices.map((service) => (

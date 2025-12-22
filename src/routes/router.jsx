@@ -19,6 +19,7 @@ import Decorator from "../Pages/Decorator/Decorator";
 import ApproveDecorator from "../Pages/Dashboard/ApproveDecorator";
 import AdminRoutes from "../PrivateRoutes/AdminRoutes";
 import UsersManagement from "../Pages/Dashboard/UsersManagement";
+import AssignDecorator from "../Pages/Dashboard/AssignDecorator";
 
 
 
@@ -51,7 +52,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "decorator",
-        loader: () => fetch("/serviceCoverage.json").then((res) => res.json()),
+        loader: () => fetch("/serviceCoverage.json"),
         element: (
           <PrivateRoutes>
             <Decorator></Decorator>
@@ -108,6 +109,11 @@ export const router = createBrowserRouter([
         path: "approve-decorator",
         
         element:<AdminRoutes><ApproveDecorator></ApproveDecorator></AdminRoutes>
+      },
+      {
+        path: "assign-decorator",
+
+        element:<AdminRoutes><AssignDecorator></AssignDecorator></AdminRoutes>
       },
       {
         path: "users-management",

@@ -82,7 +82,8 @@ const handleDelete = (id) => {
               <th>Name</th>
               <th>Price</th>
               <th>Payment</th>
-               <th>Delivery Status</th>
+              <th>TrackingId</th>
+               <th>Service Status</th>
               {/* <th>TrackingId</th> */}
               <th>Actions</th>
             </tr>
@@ -106,6 +107,7 @@ const handleDelete = (id) => {
                   )}
                 </td>
                 
+                <td>{booking.trackingId}</td>
                 <td>{booking.status}</td>
                 {/* <td>
                   <Link to={`/parcel-track/${parcel.trackingId}`}>

@@ -1,9 +1,10 @@
 import React from 'react';
-import { FaUser, FaUsers } from 'react-icons/fa';
+import {  FaUserCheck, FaUserCog, FaUsers, FaUsersCog } from 'react-icons/fa';
 import { FaCreditCard } from 'react-icons/fa6';
 import { MdOutlineEventNote } from 'react-icons/md';
 import { Link, Outlet } from 'react-router';
 import useRole from '../hooks/useRole';
+
 
 const DashboardLayout = () => {
 const {role} = useRole();
@@ -57,8 +58,15 @@ const {role} = useRole();
          <li>
           <Link to='/dashboard/approve-decorator' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="approve-decorator">
             {/* Home icon */}
-             <FaUser></FaUser>
+             <FaUserCheck></FaUserCheck>
             <span className="is-drawer-close:hidden">Approve Decorator</span>
+          </Link>
+        </li>
+         <li>
+          <Link to='/dashboard/assign-decorator' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="assign-decorator">
+            {/* Home icon */}
+              <FaUsersCog></FaUsersCog>
+            <span className="is-drawer-close:hidden">Assign Decorator</span>
           </Link>
         </li>
         <li>

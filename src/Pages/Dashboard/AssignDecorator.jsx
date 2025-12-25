@@ -9,7 +9,6 @@ const AssignDecorator = () => {
   const modalRef = useRef(null);
   const [selectedBooking, setSelectedBooking] = useState(null);
 
-  /* ---------------- Pending Bookings ---------------- */
   const {
     data: bookings = [],
     refetch: refetchBookings,
@@ -22,7 +21,6 @@ const AssignDecorator = () => {
     },
   });
 
-  /* ---------------- Available Decorators ---------------- */
   const { data: decorators = [], isFetching } = useQuery({
     queryKey: [
       "decorators",
@@ -43,43 +41,47 @@ const AssignDecorator = () => {
     },
   });
 
-  /* ---------------- Open Modal ---------------- */
   const openModal = (booking) => {
     setSelectedBooking(booking);
     modalRef.current?.showModal();
   };
 
-  /* ---------------- Assign Decorator ---------------- */
   const handleAssignDecorator = async (decorator) => {
-  try {
-    const assignInfo = {
-      decoratorId: decorator._id, // Ensure this is a string
-      decoratorName: decorator.name,
-      decoratorEmail: decorator.email,
-    };
+    try {
+      const decoratorAssignInfo = {
+        decoratorId: decorator._id,
+        decoratorName: decorator.name,
+        decoratorEmail: decorator.email,
+      };
 
-    const res = await axiosSecure.patch(`/bookings/${selectedBooking._id}`, assignInfo);
-    
-    // Log this to see what the server is actually sending back
-    console.log("Server Response:", res.data);
+      const res = await axiosSecure.patch(
+        `/bookings/${selectedBooking._id}`,
+        decoratorAssignInfo
+      );
 
-    if (res.data.modifiedCount > 0 || res.data.acknowledged) {
-      modalRef.current.close();
-      refetchBookings();
-      Swal.fire({ icon: "success", title: "Assigned!", timer: 1500 });
-    } else {
-      // If the database didn't actually change anything
-      Swal.fire({ icon: "info", title: "No changes made", text: "Decorator might already be assigned." });
+      console.log("Server Response:", res.data);
+
+      if (res.data.modifiedCount > 0 || res.data.acknowledged) {
+        modalRef.current.close();
+        refetchBookings();
+        Swal.fire({ icon: "success", title: "Assigned!", timer: 1500 });
+      } else {
+        
+        Swal.fire({
+          icon: "info",
+          title: "No changes made",
+          text: "Decorator might already be assigned.",
+        });
+      }
+    } catch (error) {
+      console.error("Assignment Error:", error.response?.data || error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Assignment Failed",
+        text: error.response?.data?.message || "Check console for details",
+      });
     }
-  } catch (error) {
-    console.error("Assignment Error:", error.response?.data || error.message);
-    Swal.fire({
-      icon: "error",
-      title: "Assignment Failed",
-      text: error.response?.data?.message || "Check console for details",
-    });
-  }
-};
+  };
 
   if (isLoading) {
     return <p className="text-center">Loading bookings...</p>;
@@ -96,11 +98,12 @@ const AssignDecorator = () => {
         <table className="table table-zebra">
           <thead>
             <tr>
-              <th>#</th>
+              <th></th>
               <th>Service</th>
               <th>Price</th>
-              <th>District</th>
-              <th>Expertise</th>
+              <th>Location</th>
+              <th>TrackingId</th>
+              
               <th>Action</th>
             </tr>
           </thead>
@@ -110,8 +113,8 @@ const AssignDecorator = () => {
                 <td>{index + 1}</td>
                 <td>{booking.serviceName}</td>
                 <td>${booking.price}</td>
-                <td>{booking.district}</td>
-                <td>{booking.expertise}</td>
+                <td>{booking.location}</td>
+                <th>{booking.trackingId}</th>
                 <td>
                   <button
                     onClick={() => openModal(booking)}

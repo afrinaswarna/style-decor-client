@@ -20,6 +20,9 @@ import ApproveDecorator from "../Pages/Dashboard/ApproveDecorator";
 import AdminRoutes from "../PrivateRoutes/AdminRoutes";
 import UsersManagement from "../Pages/Dashboard/UsersManagement";
 import AssignDecorator from "../Pages/Dashboard/AssignDecorator";
+import DecoratorRoutes from "../PrivateRoutes/DecoratorRoutes";
+
+import MyAssignedProjects from "../Pages/Dashboard/MyAssignedProjects";
 
 
 
@@ -120,6 +123,10 @@ export const router = createBrowserRouter([
 
         element:<AdminRoutes><UsersManagement></UsersManagement></AdminRoutes>
       },
+      {
+        path:'assigned-projects',
+        element:<DecoratorRoutes><MyAssignedProjects></MyAssignedProjects></DecoratorRoutes>
+      }
     ],
   },
 ]);

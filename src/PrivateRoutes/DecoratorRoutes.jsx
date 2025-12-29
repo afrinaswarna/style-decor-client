@@ -12,7 +12,7 @@ const DecoratorRoutes = ({ children }) => {
     return <LoadingSpinner></LoadingSpinner>;
   }
 
-  if (role !== "rider") {
+  if (role !== "decorator") {
     return <Forbidden></Forbidden>;
   }
   return children;

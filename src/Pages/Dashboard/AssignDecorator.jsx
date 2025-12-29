@@ -25,7 +25,7 @@ const AssignDecorator = () => {
     queryKey: [
       "decorators",
       selectedBooking?.district,
-      selectedBooking?.expertise,
+      // selectedBooking?.expertise,
     ],
     enabled: !!selectedBooking,
     queryFn: async () => {
@@ -34,7 +34,7 @@ const AssignDecorator = () => {
           status: "approved",
           workStatus: "available",
           district: selectedBooking.district,
-          expertise: selectedBooking.expertise,
+          // expertise: selectedBooking.expertise,
         },
       });
       return res.data;
@@ -66,7 +66,6 @@ const AssignDecorator = () => {
         refetchBookings();
         Swal.fire({ icon: "success", title: "Assigned!", timer: 1500 });
       } else {
-        
         Swal.fire({
           icon: "info",
           title: "No changes made",
@@ -103,7 +102,7 @@ const AssignDecorator = () => {
               <th>Price</th>
               <th>Location</th>
               <th>TrackingId</th>
-              
+
               <th>Action</th>
             </tr>
           </thead>
@@ -156,6 +155,7 @@ const AssignDecorator = () => {
                     <th>#</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Location</th>
                     <th>Expertise</th>
                     <th>Action</th>
                   </tr>
@@ -166,6 +166,7 @@ const AssignDecorator = () => {
                       <td>{i + 1}</td>
                       <td>{decorator.name}</td>
                       <td>{decorator.email}</td>
+                      <td>{decorator.district}</td>
                       <td>{decorator.expertise?.join(", ")}</td>
                       <td>
                         <button

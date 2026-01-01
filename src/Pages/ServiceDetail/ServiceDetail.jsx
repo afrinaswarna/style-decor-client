@@ -45,7 +45,7 @@ const ServiceDetails = () => {
       price: service.cost,
       
       location: data.location,
-      status: "pending",
+      serviceStatus: "pending",
       createdAt: new Date(),
     };
 

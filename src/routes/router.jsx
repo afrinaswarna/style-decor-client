@@ -23,6 +23,7 @@ import AssignDecorator from "../Pages/Dashboard/AssignDecorator";
 import DecoratorRoutes from "../PrivateRoutes/DecoratorRoutes";
 
 import MyAssignedProjects from "../Pages/Dashboard/MyAssignedProjects";
+import TodaySchedule from "../Pages/Dashboard/TodaySchedule";
 
 
 
@@ -126,6 +127,10 @@ export const router = createBrowserRouter([
       {
         path:'assigned-projects',
         element:<DecoratorRoutes><MyAssignedProjects></MyAssignedProjects></DecoratorRoutes>
+      },
+      {
+        path:'today-schedule',
+        element:<DecoratorRoutes><TodaySchedule></TodaySchedule></DecoratorRoutes>
       }
     ],
   },

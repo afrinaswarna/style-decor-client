@@ -1,5 +1,5 @@
 import React from 'react';
-import {  FaTasks, FaUserCheck, FaUserCog, FaUsers, FaUsersCog } from 'react-icons/fa';
+import {  FaCalendarDay, FaTasks, FaUserCheck, FaUserCog, FaUsers, FaUsersCog } from 'react-icons/fa';
 import { FaCreditCard } from 'react-icons/fa6';
 import { MdOutlineEventNote } from 'react-icons/md';
 import { Link, Outlet } from 'react-router';
@@ -67,19 +67,20 @@ const {role} = useRole();
                     </span>
                   </Link>
                 </li>
-                {/* <li>
+               
+                <li>
                   <Link
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Completed Deliveries"
-                    to="/dashboard/completed-deliveries"
+                    data-tip="Today Schedule"
+                    to="/dashboard/today-schedule"
                   >
-                   <VscTasklist />
-
+                    <FaCalendarDay/>
                     <span className="is-drawer-close:hidden">
-                      Completed Deliveries
+                      Today Schedule
                     </span>
                   </Link>
-                </li> */}
+                </li>
+               
               </>
             )}
 

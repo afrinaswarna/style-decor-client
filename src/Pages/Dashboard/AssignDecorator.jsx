@@ -1,8 +1,8 @@
-// import React, { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useRef, useState } from "react";
+import { FaUserPlus, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const AssignDecorator = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,171 +22,222 @@ const AssignDecorator = () => {
   });
 
   const { data: decorators = [], isFetching } = useQuery({
-    queryKey: [
-      "decorators",
-      selectedBooking?.district,
-      // selectedBooking?.expertise,
-    ],
-    enabled: !!selectedBooking,
+    queryKey: ["available-decorators", selectedBooking?.serviceDate],
+    enabled: !!selectedBooking?.serviceDate,
     queryFn: async () => {
-      const res = await axiosSecure.get("/decorators", {
+      const res = await axiosSecure.get("/available-decorators", {
         params: {
-          status: "approved",
-          workStatus: "available",
-          district: selectedBooking.district,
-          // expertise: selectedBooking.expertise,
+          date: selectedBooking.serviceDate,
+          district: selectedBooking.location,
         },
       });
       return res.data;
     },
   });
 
-  const openModal = (booking) => {
-    setSelectedBooking(booking);
-    modalRef.current?.showModal();
+  const updateServiceDate = async (id, date) => {
+    try {
+      await axiosSecure.patch(`/bookings/${id}/service-date`, {
+        serviceDate: date,
+      });
+      refetchBookings();
+      Swal.fire({
+        icon: "success",
+        title: "Date Updated",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    } catch {
+      Swal.fire("Error", "Failed to set date", "error");
+    }
   };
 
   const handleAssignDecorator = async (decorator) => {
     try {
-      const decoratorAssignInfo = {
+      const res = await axiosSecure.patch(`/bookings/${selectedBooking._id}`, {
         decoratorId: decorator._id,
         decoratorName: decorator.name,
         decoratorEmail: decorator.email,
-      };
-
-      const res = await axiosSecure.patch(
-        `/bookings/${selectedBooking._id}`,
-        decoratorAssignInfo
-      );
-
-      console.log("Server Response:", res.data);
+      });
 
       if (res.data.modifiedCount > 0 || res.data.acknowledged) {
         modalRef.current.close();
         refetchBookings();
-        Swal.fire({ icon: "success", title: "Assigned!", timer: 1500 });
-      } else {
         Swal.fire({
-          icon: "info",
-          title: "No changes made",
-          text: "Decorator might already be assigned.",
+          icon: "success",
+          title: "Success",
+          text: `${decorator.name} has been assigned!`,
+          timer: 2000,
         });
       }
-    } catch (error) {
-      console.error("Assignment Error:", error.response?.data || error.message);
-      Swal.fire({
-        icon: "error",
-        title: "Assignment Failed",
-        text: error.response?.data?.message || "Check console for details",
-      });
+    } catch (e) {
+      Swal.fire("Error", "Assignment failed", e);
     }
   };
 
-  if (isLoading) {
-    return <p className="text-center">Loading bookings...</p>;
-  }
+  if (isLoading)
+    return (
+      <div className="flex justify-center p-20">
+        <span className="loading loading-dots loading-lg text-primary"></span>
+      </div>
+    );
 
   return (
-    <div className="p-4">
-      <h2 className="text-3xl font-bold text-center mb-6">
-        Assign Decorators ({bookings.length})
-      </h2>
+    <div className="p-8 bg-base-100 min-h-screen">
+      <div className="max-w-7xl mx-auto">
+        <header className="flex justify-between items-center mb-8">
+          <div>
+            <h2 className="text-4xl font-black text-secondary">
+              Assign Decorators
+            </h2>
+            <p className="text-gray-500">
+              Manage and allocate staff to pending bookings
+            </p>
+          </div>
+          <div className="stats shadow bg-primary text-primary-content">
+            <div className="stat">
+              <div className="stat-title text-primary-content opacity-70">
+                Pending Tasks
+              </div>
+              <div className="stat-value">{bookings.length}</div>
+            </div>
+          </div>
+        </header>
 
-      {/* ---------------- Bookings Table ---------------- */}
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Service</th>
-              <th>Price</th>
-              <th>Location</th>
-              <th>TrackingId</th>
-
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookings.map((booking, index) => (
-              <tr key={booking._id}>
-                <td>{index + 1}</td>
-                <td>{booking.serviceName}</td>
-                <td>${booking.price}</td>
-                <td>{booking.location}</td>
-                <th>{booking.trackingId}</th>
-                <td>
-                  <button
-                    onClick={() => openModal(booking)}
-                    className="btn btn-sm bg-primary text-black"
-                  >
-                    Assign
-                  </button>
-                </td>
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-base-200">
+          <table className="table table-lg w-full">
+            <thead className="bg-base-200">
+              <tr>
+                <th>Service Details</th>
+                <th>Location</th>
+                <th>Service Date</th>
+                <th className="text-center">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {bookings.length === 0 && (
-          <p className="text-center mt-4 text-gray-500">
-            No pending bookings found
-          </p>
-        )}
+            </thead>
+            <tbody>
+              {bookings.map((booking) => (
+                <tr
+                  key={booking._id}
+                  className="hover:bg-base-50 transition-colors"
+                >
+                  <td>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-lg">
+                        {booking.serviceName}
+                      </span>
+                      <span className="badge badge-ghost badge-sm">
+                        {booking.serviceCategory}
+                      </span>
+                      <span className="text-xs text-gray-400 mt-1">
+                        ID: {booking.trackingId}
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-2">
+                      <FaMapMarkerAlt className="text-error" />
+                      <span>{booking.location}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <input
+                      type="date"
+                      value={booking.serviceDate || ""}
+                      onChange={(e) =>
+                        updateServiceDate(booking._id, e.target.value)
+                      }
+                      className="input input-bordered input-md focus:input-primary"
+                    />
+                  </td>
+                  <td className="text-center">
+                    {booking.serviceDate ? (
+                      <button
+                        onClick={() => {
+                          setSelectedBooking(booking);
+                          modalRef.current.showModal();
+                        }}
+                        className="btn btn-primary btn-md shadow-md hover:scale-105 transition-transform"
+                      >
+                        <FaUserPlus /> Assign Staff
+                      </button>
+                    ) : (
+                      <div
+                        className="tooltip tooltip-left"
+                        data-tip="Select a date first"
+                      >
+                        <button className="btn btn-disabled btn-md">
+                          Assign Staff
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      {/* ---------------- Assign Decorator Modal ---------------- */}
-      <dialog ref={modalRef} className="modal">
-        <div className="modal-box max-w-3xl">
-          <h3 className="font-bold text-lg mb-4">
-            Available Decorators ({decorators.length})
-          </h3>
-
-          {isFetching ? (
-            <p>Loading decorators...</p>
-          ) : decorators.length === 0 ? (
-            <p className="text-center text-red-500">
-              No matching decorators available
+      {/* MODAL REDESIGN */}
+      <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box max-w-4xl p-0 overflow-hidden">
+          <div className="bg-secondary p-6 text-white">
+            <h3 className="font-bold text-2xl flex items-center gap-2">
+              <FaCalendarAlt /> Available Decorators
+            </h3>
+            <p className="opacity-80">
+              Showing results for {selectedBooking?.serviceDate} in{" "}
+              {selectedBooking?.location}
             </p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="table table-zebra">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Location</th>
-                    <th>Expertise</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {decorators.map((decorator, i) => (
-                    <tr key={decorator._id}>
-                      <td>{i + 1}</td>
-                      <td>{decorator.name}</td>
-                      <td>{decorator.email}</td>
-                      <td>{decorator.district}</td>
-                      <td>{decorator.expertise?.join(", ")}</td>
-                      <td>
-                        <button
-                          onClick={() => handleAssignDecorator(decorator)}
-                          className="btn btn-sm bg-primary text-black"
-                        >
-                          Assign
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+          </div>
 
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn">Close</button>
-            </form>
+          <div className="p-6">
+            {isFetching ? (
+              <div className="py-10 text-center">
+                <span className="loading loading-spinner text-secondary"></span>
+              </div>
+            ) : decorators.length === 0 ? (
+              <div className="alert alert-error">
+                No staff available for this date/location.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {decorators.map((decorator) => (
+                  <div
+                    key={decorator._id}
+                    className="card side bg-base-100 border hover:shadow-md transition-shadow"
+                  >
+                    <div className="card-body p-4 flex-row items-center justify-between">
+                      <div>
+                        <h4 className="font-bold">{decorator.name}</h4>
+                        <p className="text-sm opacity-60">{decorator.email}</p>
+                        <div className="flex gap-1 mt-2">
+                          {decorator.expertise?.slice(0, 2).map((ex) => (
+                            <span
+                              key={ex}
+                              className="badge badge-outline badge-xs"
+                            >
+                              {ex}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => handleAssignDecorator(decorator)}
+                        className="btn btn-secondary btn-sm"
+                      >
+                        Select
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="modal-action">
+              <form method="dialog">
+                <button className="btn btn-ghost">Cancel</button>
+              </form>
+            </div>
           </div>
         </div>
       </dialog>

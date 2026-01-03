@@ -77,13 +77,13 @@ console.log(completedProjects)
 
         <div className="tabs tabs-boxed bg-slate-200 p-1 rounded-2xl">
           <button 
-            className={`tab tab-lg gap-2 rounded-xl transition-all ${activeTab === 'active' ? 'tab-active !bg-primary !text-white shadow-md' : 'text-slate-600'}`}
+            className={`tab tab-lg gap-2 rounded-xl transition-all ${activeTab === 'active' ? 'tab-active ! bg-primary ! text-white shadow-md' : 'text-slate-600'}`}
             onClick={() => setActiveTab('active')}
           >
             Active Tasks <div className="badge badge-sm border-none bg-black/20 text-white">{activeProjects.length}</div>
           </button>
           <button 
-            className={`tab tab-lg gap-2 rounded-xl transition-all ${activeTab === 'history' ? 'tab-active !bg-primary !text-white shadow-md' : 'text-slate-600'}`}
+            className={`tab tab-lg gap-2 rounded-xl transition-all ${activeTab === 'history' ? 'tab-active ! bg-primary ! text-white shadow-md' : 'text-slate-600'}`}
             onClick={() => setActiveTab('history')}
           >
             <FaHistory size={14}/> History <div className="badge badge-sm border-none bg-black/20 text-white">{completedProjects.length}</div>

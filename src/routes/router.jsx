@@ -24,6 +24,7 @@ import DecoratorRoutes from "../PrivateRoutes/DecoratorRoutes";
 
 import MyAssignedProjects from "../Pages/Dashboard/MyAssignedProjects";
 import TodaySchedule from "../Pages/Dashboard/TodaySchedule";
+import MyEarnings from "../Pages/Dashboard/MyEarnings";
 
 
 
@@ -131,6 +132,10 @@ export const router = createBrowserRouter([
       {
         path:'today-schedule',
         element:<DecoratorRoutes><TodaySchedule></TodaySchedule></DecoratorRoutes>
+      },
+      {
+        path:'my-earnings',
+        element:<DecoratorRoutes><MyEarnings></MyEarnings></DecoratorRoutes>
       }
     ],
   },

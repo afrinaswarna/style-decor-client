@@ -1,140 +1,150 @@
 import React from 'react';
-import {  FaCalendarDay, FaMoneyBillWave, FaTasks, FaUserCheck, FaUserCog, FaUsers, FaUsersCog } from 'react-icons/fa';
-import { FaCreditCard } from 'react-icons/fa6';
-import { MdOutlineEventNote } from 'react-icons/md';
-import { Link, Outlet } from 'react-router';
+import { FaCalendarDay, FaMoneyBillWave, FaTasks, FaUserCheck, FaUsers, FaUsersCog, FaHome, FaSignOutAlt } from 'react-icons/fa';
+import { FaCreditCard, FaGear } from 'react-icons/fa6';
+import { MdOutlineEventNote, MdDashboard } from 'react-icons/md';
+import { Link, NavLink, Outlet } from 'react-router';
 import useRole from '../hooks/useRole';
 
-
 const DashboardLayout = () => {
-const {role} = useRole();
-    return (
-        <div className="drawer lg:drawer-open">
-  <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-  <div className="drawer-content">
-    {/* Navbar */}
-    <nav className="navbar w-full bg-base-300">
-      <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost">
-        {/* Sidebar toggle icon */}
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
-      </label>
-      <div className="px-4">Navbar Title</div>
-    </nav>
-    {/* Page content here */}
-    <div className="p-4">
-        <Outlet></Outlet>
-    </div>
-  </div>
+  const { role } = useRole();
 
-  <div className="drawer-side is-drawer-close:overflow-visible">
-    <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-    <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-      {/* Sidebar content here */}
-      <ul className="menu w-full grow">
-        {/* List item */}
-        <li>
-          <Link to='/' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-            {/* Home icon */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-            <span className="is-drawer-close:hidden">Homepage</span>
-          </Link>
-        </li>
-        <li>
-          <Link to='/dashboard/my-booking' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Bookings">
-            {/* Home icon */}
-            <MdOutlineEventNote />
-            <span className="is-drawer-close:hidden">My Bookings</span>
-          </Link>
-        </li>
-        <li>
-          <Link to='/dashboard/payment-history' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment-history">
-            {/* Home icon */}
-             <FaCreditCard />
-            <span className="is-drawer-close:hidden">Payment History</span>
-          </Link>
-        </li>
-        {role === "decorator" && (
-              <>
-                <li>
-                  <Link
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Assigned Projects"
-                    to="/dashboard/assigned-projects"
-                  >
-                    <FaTasks />
-                    <span className="is-drawer-close:hidden">
-                      Assigned Projects
-                    </span>
-                  </Link>
-                </li>
-               
-                <li>
-                  <Link
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Today Schedule"
-                    to="/dashboard/today-schedule"
-                  >
-                    <FaCalendarDay/>
-                    <span className="is-drawer-close:hidden">
-                      Today Schedule
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="My Earnings"
-                    to="/dashboard/my-earnings"
-                  >
-                    <FaMoneyBillWave/>
-                    <span className="is-drawer-close:hidden">
-                      My Earnings
-                    </span>
-                  </Link>
-                </li>
-               
-              </>
-            )}
+  // Active link style using your primary color
+  const activeLink = "bg-teal-50 text-[var(--color-primary)] font-bold border-r-4 border-[var(--color-primary)] rounded-none";
+  const normalLink = "text-slate-600 hover:bg-slate-50 hover:text-[var(--color-primary)] transition-all duration-200 rounded-lg mx-2";
 
-     {
-      role === 'admin' && <>
-         <li>
-          <Link to='/dashboard/approve-decorator' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="approve-decorator">
-            {/* Home icon */}
-             <FaUserCheck></FaUserCheck>
-            <span className="is-drawer-close:hidden">Approve Decorator</span>
-          </Link>
-        </li>
-         <li>
-          <Link to='/dashboard/assign-decorator' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="assign-decorator">
-            {/* Home icon */}
-              <FaUsersCog></FaUsersCog>
-            <span className="is-drawer-close:hidden">Assign Decorator</span>
-          </Link>
-        </li>
-        <li>
-          <Link to='/dashboard/users-management' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="users-management">
-            {/* Home icon */}
-             <FaUsers />
-            <span className="is-drawer-close:hidden">Users Management</span>
-          </Link>
-        </li>
-      </>
-     }
+  return (
+    <div className="drawer lg:drawer-open bg-slate-50">
+      <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+      
+      <div className="drawer-content flex flex-col">
+        {/* Simple Top Navbar */}
+        <nav className="navbar bg-white border-b border-slate-200 px-4 py-3 sticky top-0 z-20">
+          <div className="flex-none lg:hidden">
+            <label htmlFor="my-drawer-4" className="btn btn-square btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </label>
+          </div>
+          <div className="flex-1 px-2 mx-2 font-black text-xl text-slate-800 tracking-tight">
+            Style<span className="text-primary">Decor</span>
+          </div>
+          <div className="flex-none gap-2">
+             <div className="text-right hidden md:block mr-2">
+                <p className="text-xs font-bold text-slate-800 capitalize">{role} Panel</p>
+                
+             </div>
+             <div className="avatar placeholder">
+                <div className="bg-primary text-white rounded-full w-10">
+                  <span className="text-xs">JD</span>
+                </div>
+             </div>
+          </div>
+        </nav>
 
+        {/* Main Content Area */}
+        <main className="p-4 md:p-8 min-h-screen">
+          <Outlet />
+        </main>
+      </div>
+
+      {/* Sidebar */}
+      <div className="drawer-side z-30">
+        <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
         
-        <li>
-          <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
-            {/* Settings icon */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
-            <span className="is-drawer-close:hidden">Settings</span>
-          </button>
-        </li>
-      </ul>
+        <div className="bg-white border-r border-slate-200 w-72 min-h-full flex flex-col justify-between py-6">
+          <div>
+            {/* Sidebar Branding - Hidden on mobile as it's in navbar */}
+            <div className="px-8 mb-8 hidden lg:block">
+              <h1 className="text-2xl font-black text-slate-800">Dashboard</h1>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Management Console</p>
+            </div>
+
+            <ul className="menu p-0 space-y-1">
+              {/* Common Links */}
+              <p className="px-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-4">Main Menu</p>
+              <li>
+                <NavLink to='/' className={({ isActive }) => isActive ? activeLink : normalLink}>
+                  <FaHome className="text-lg" /> Homepage
+                </NavLink>
+              </li>
+
+              {/* Decorator Specific Links */}
+              {role === "decorator" && (
+                <>
+                  <p className="px-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-6">Workplace</p>
+                  <li>
+                    <NavLink to="/dashboard/assigned-projects" className={({ isActive }) => isActive ? activeLink : normalLink}>
+                      <FaTasks className="text-lg" /> Assigned Projects
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/today-schedule" className={({ isActive }) => isActive ? activeLink : normalLink}>
+                      <FaCalendarDay className="text-lg" /> Today's Schedule
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/my-earnings" className={({ isActive }) => isActive ? activeLink : normalLink}>
+                      <FaMoneyBillWave className="text-lg" /> My Earnings
+                    </NavLink>
+                  </li>
+                </>
+              )}
+
+              {/* User/Client Links */}
+              <p className="px-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-6">My Activity</p>
+              <li>
+                <NavLink to='/dashboard/my-booking' className={({ isActive }) => isActive ? activeLink : normalLink}>
+                  <MdOutlineEventNote className="text-lg" /> My Bookings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/dashboard/payment-history' className={({ isActive }) => isActive ? activeLink : normalLink}>
+                  <FaCreditCard className="text-lg" /> Payment History
+                </NavLink>
+              </li>
+
+              {/* Admin Specific Links */}
+              {role === 'admin' && (
+                <>
+                  <p className="px-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-6">Administration</p>
+                  <li>
+                    <NavLink to='/dashboard/approve-decorator' className={({ isActive }) => isActive ? activeLink : normalLink}>
+                      <FaUserCheck className="text-lg" /> Approve Decorator
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to='/dashboard/assign-decorator' className={({ isActive }) => isActive ? activeLink : normalLink}>
+                      <FaUsersCog className="text-lg" /> Assign Decorator
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to='/dashboard/users-management' className={({ isActive }) => isActive ? activeLink : normalLink}>
+                      <FaUsers className="text-lg" /> Users Management
+                    </NavLink>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+
+          {/* Bottom Menu */}
+          <div className="border-t border-slate-100 pt-4">
+            <ul className="menu p-0">
+              <li>
+                <button className={normalLink}>
+                  <FaGear className="text-lg" /> Settings
+                </button>
+              </li>
+              <li>
+                <button className={`${normalLink} text-red-500 hover:bg-red-50 hover:text-red-600`}>
+                  <FaSignOutAlt className="text-lg" /> Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-    );
+  );
 };
 
 export default DashboardLayout;

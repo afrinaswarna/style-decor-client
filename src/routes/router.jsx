@@ -25,6 +25,7 @@ import DecoratorRoutes from "../PrivateRoutes/DecoratorRoutes";
 import MyAssignedProjects from "../Pages/Dashboard/MyAssignedProjects";
 import TodaySchedule from "../Pages/Dashboard/TodaySchedule";
 import MyEarnings from "../Pages/Dashboard/MyEarnings";
+import MyProfile from "../Pages/Dashboard/MyProfile";
 
 
 
@@ -101,6 +102,10 @@ export const router = createBrowserRouter([
       {
         path: "payment-history",
         Component: PaymentHistory,
+      },
+      {
+        path: "my-profile",
+        Component: MyProfile,
       },
       {
         path: "payment-success",

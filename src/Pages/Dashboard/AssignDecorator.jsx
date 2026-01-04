@@ -32,7 +32,7 @@ const AssignDecorator = () => {
     queryKey: [
       "available-decorators",
       selectedBooking?.serviceDate,
-      selectedBooking?.location,
+      selectedBooking?.district,
     ],
     enabled: !!selectedBooking?.serviceDate,
     queryFn: async () => {

@@ -92,6 +92,11 @@ const DashboardLayout = () => {
               {/* User/Client Links */}
               <p className="px-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-6">My Activity</p>
               <li>
+                <NavLink to='/dashboard/my-profile' className={({ isActive }) => isActive ? activeLink : normalLink}>
+                  <MdOutlineEventNote className="text-lg" /> My Profile
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to='/dashboard/my-booking' className={({ isActive }) => isActive ? activeLink : normalLink}>
                   <MdOutlineEventNote className="text-lg" /> My Bookings
                 </NavLink>

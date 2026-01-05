@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { useForm, useWatch } from "react-hook-form";
 import { FaCheckCircle, FaStar } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-
+import useRole from "../../hooks/useRole";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -17,6 +17,7 @@ const ServiceDetails = () => {
   const { user } = useAuth();
   const bookingModalRef = useRef(null);
   const [activeImg, setActiveImg] = useState(null);
+  const {role} = useRole()
 
   // 1. Fetch Service Coverage from Public Folder
   const { data: areas = [] } = useQuery({
@@ -166,12 +167,23 @@ const ServiceDetails = () => {
                 </span>
               </p>
             </div>
-            <button
-              onClick={handleOpenModal}
-              className="bg-slate-900 hover:bg-teal-700 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-lg shadow-slate-200"
-            >
-              Book Service
-            </button>
+            {user?.email === service.createdByEmail || role === 'admin' ? (
+              <button
+                onClick={() =>
+                  navigate(`/dashboard/update-service/${service._id}`)
+                }
+                className="bg-amber-500 hover:bg-amber-600 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-lg shadow-amber-100"
+              >
+                Edit This Package
+              </button>
+            ) : (
+              <button
+                onClick={handleOpenModal}
+                className="bg-slate-900 hover:bg-teal-700 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-lg shadow-slate-200"
+              >
+                Book Service
+              </button>
+            )}
           </div>
         </div>
       </div>

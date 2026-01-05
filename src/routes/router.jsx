@@ -26,6 +26,7 @@ import MyAssignedProjects from "../Pages/Dashboard/MyAssignedProjects";
 import TodaySchedule from "../Pages/Dashboard/TodaySchedule";
 import MyEarnings from "../Pages/Dashboard/MyEarnings";
 import MyProfile from "../Pages/Dashboard/MyProfile";
+import AddServices from "../Pages/Dashboard/AddServices";
 
 
 
@@ -114,6 +115,11 @@ export const router = createBrowserRouter([
       {
         path: "payment-cancelled",
         Component: PaymentCancelled,
+      },
+      {
+        path: "add-services",
+        
+        element:<AdminRoutes><AddServices></AddServices></AdminRoutes>
       },
       {
         path: "approve-decorator",

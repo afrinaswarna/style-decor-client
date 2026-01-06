@@ -27,6 +27,9 @@ import TodaySchedule from "../Pages/Dashboard/TodaySchedule";
 import MyEarnings from "../Pages/Dashboard/MyEarnings";
 import MyProfile from "../Pages/Dashboard/MyProfile";
 import AddServices from "../Pages/Dashboard/AddServices";
+import ManageServices from "../Pages/Dashboard/ManageServices";
+
+import UpdateServices from "../Pages/Dashboard/UpdateServices";
 
 
 
@@ -120,6 +123,16 @@ export const router = createBrowserRouter([
         path: "add-services",
         
         element:<AdminRoutes><AddServices></AddServices></AdminRoutes>
+      },
+      {
+        path: "manage-services",
+        
+        element:<AdminRoutes><ManageServices></ManageServices></AdminRoutes>
+      },
+      {
+        path: "update-service/:id",
+        
+        element:<AdminRoutes><UpdateServices></UpdateServices></AdminRoutes>
       },
       {
         path: "approve-decorator",

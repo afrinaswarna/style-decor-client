@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaCalendarDay, FaMoneyBillWave, FaTasks, FaUserCheck, FaUsers, FaUsersCog, FaHome, FaSignOutAlt, FaPlus, FaBoxOpen } from 'react-icons/fa';
-import { FaCreditCard, FaGear, FaUsersGear } from 'react-icons/fa6';
+import { FaCircleUser, FaCreditCard, FaGear, FaListCheck, FaUsersGear } from 'react-icons/fa6';
 import { MdOutlineEventNote, MdDashboard } from 'react-icons/md';
 import { Link, NavLink, Outlet } from 'react-router';
 import useRole from '../hooks/useRole';
@@ -93,7 +93,7 @@ const DashboardLayout = () => {
               <p className="px-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-6">My Activity</p>
               <li>
                 <NavLink to='/dashboard/my-profile' className={({ isActive }) => isActive ? activeLink : normalLink}>
-                  <MdOutlineEventNote className="text-lg" /> My Profile
+                  <FaCircleUser className="text-lg" /> My Profile
                 </NavLink>
               </li>
               <li>
@@ -117,13 +117,18 @@ const DashboardLayout = () => {
                     </NavLink>
                   </li>
                   <li>
+                    <NavLink to='/dashboard/manage-services' className={({ isActive }) => isActive ? activeLink : normalLink}>
+                      <FaListCheck className="text-lg" /> Manage Services
+                    </NavLink>
+                  </li>
+                  <li>
                     <NavLink to='/dashboard/approve-decorator' className={({ isActive }) => isActive ? activeLink : normalLink}>
                       <FaUserCheck className="text-lg" /> Approve Decorator
                     </NavLink>
                   </li>
                   <li>
                     <NavLink to='/dashboard/assign-decorator' className={({ isActive }) => isActive ? activeLink : normalLink}>
-                      <FaUsers className="text-lg" /> Assign Decorator
+                      <FaUsers className="text-lg" />Assign Decorator
                     </NavLink>
                   </li>
                   <li>

@@ -1,64 +1,89 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth";
+import { useParams, useNavigate } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const AddService = () => {
-  const { user } = useAuth();
+const UpdateServices = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = async (data) => {
-    // Handle Arrays carefully to match your DB structure
-    const featuresArray = data.features
-      ? data.features.split(",").map((item) => item.trim())
-      : [];
-    const galleryArray = data.gallery
-      ? data.gallery.split(",").map((item) => item.trim())
-      : [];
+  // 1. Fetch existing data from MongoDB
+  const { data: service, isLoading } = useQuery({
+    queryKey: ["service", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/services/${id}`);
+      return res.data;
+    },
+  });
 
-    const serviceItem = {
+  // 2. Pre-fill the form once data is loaded
+  useEffect(() => {
+    if (service) {
+      reset({
+        service_name: service.service_name,
+        service_category: service.service_category,
+        cost: service.cost,
+        unit: service.unit,
+        image: service.image,
+        shortDescription: service.shortDescription,
+        description: service.description,
+        // Converting arrays back to comma-separated strings for the input fields
+        features: service.features?.join(", "),
+        gallery: service.gallery?.join(", "),
+      });
+    }
+  }, [service, reset]);
+
+  const onSubmit = async (data) => {
+    // Prepare data for MongoDB (convert strings back to numbers/arrays)
+    const updatedDoc = {
       service_name: data.service_name,
-      service_category: data.service_category, 
+      service_category: data.service_category,
       cost: parseFloat(data.cost),
       unit: data.unit,
       image: data.image,
-      shortDescription: data.shortDescription, 
+      shortDescription: data.shortDescription,
       description: data.description,
-      features: featuresArray,
-      gallery: galleryArray,
-      rating: 5.0, 
-      createdByEmail: user?.email, 
+      features: data.features
+        ? data.features.split(",").map((f) => f.trim())
+        : [],
+      gallery: data.gallery ? data.gallery.split(",").map((g) => g.trim()) : [],
     };
 
     try {
-      const res = await axiosSecure.post("/services", serviceItem);
-      if (res.data.insertedId) {
-        reset();
+      const res = await axiosSecure.put(`/services/${id}`, updatedDoc);
+      if (res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
         Swal.fire({
           icon: "success",
-          title: "Package Published",
-          text: "Your service is now live and case-matched to your DB!",
+          title: "Update Successful",
+          text: "The package has been updated in the database.",
           timer: 1500,
           showConfirmButton: false,
-          customClass: { popup: "rounded-[2rem]" },
         });
+        navigate("/dashboard/manage-services");
       }
     } catch (error) {
-      console.error("Post Error:", error);
-      Swal.fire("Error", "Failed to add service", "error");
+      Swal.fire("Error", "Could not update service", "error",error);
     }
   };
 
+  if (isLoading)
+    return (
+      <div className="text-center py-20 font-black italic">Loading Data...</div>
+    );
+
   return (
     <div className="p-8 md:p-12 bg-white rounded-[3rem] shadow-sm border border-slate-100 max-w-5xl mx-auto mt-10">
-      <header className="mb-10 text-center md:text-left">
+      <header className="mb-10">
         <h2 className="text-3xl font-black text-slate-900 tracking-tighter">
-          Inventory Management
+          Edit Package
         </h2>
-        <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.3em] mt-2">
-          Create New Decoration Package
+        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+          Modify existing service details
         </p>
       </header>
 
@@ -66,7 +91,7 @@ const AddService = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 md:grid-cols-2 gap-8"
       >
-        {/* Basic Details */}
+        {/* Left Column */}
         <div className="space-y-6">
           <div className="form-control">
             <label className="label font-black text-[10px] uppercase text-slate-400 tracking-widest">
@@ -74,7 +99,6 @@ const AddService = () => {
             </label>
             <input
               {...register("service_name")}
-              placeholder="e.g. Elegant Wedding Decoration"
               className="input bg-slate-50 border-slate-100 rounded-2xl font-bold h-14"
               required
             />
@@ -85,12 +109,9 @@ const AddService = () => {
               Service Category
             </label>
             <select
-              {...register("service_category", { required: true })}
+              {...register("service_category")}
               className="select select-bordered bg-slate-50 border-slate-100 rounded-2xl font-bold h-14"
             >
-              <option value="" disabled selected>
-                Select Category
-              </option>
               <option value="Wedding Event">Wedding Event</option>
               <option value="Corporate Event">Corporate Event</option>
               <option value="Social Event">Social Event</option>
@@ -117,7 +138,6 @@ const AddService = () => {
               </label>
               <input
                 {...register("unit")}
-                placeholder="per event"
                 className="input bg-slate-50 border-slate-100 rounded-2xl font-bold h-14"
                 required
               />
@@ -125,7 +145,7 @@ const AddService = () => {
           </div>
         </div>
 
-        {/* Media & Shorts */}
+        {/* Right Column */}
         <div className="space-y-6">
           <div className="form-control">
             <label className="label font-black text-[10px] uppercase text-slate-400 tracking-widest">
@@ -144,7 +164,6 @@ const AddService = () => {
             </label>
             <input
               {...register("shortDescription")}
-              placeholder="Quick summary for cards..."
               className="input bg-slate-50 border-slate-100 rounded-2xl font-bold h-14"
               required
             />
@@ -152,17 +171,16 @@ const AddService = () => {
 
           <div className="form-control">
             <label className="label font-black text-[10px] uppercase text-slate-400 tracking-widest">
-              Gallery Images (Comma Separated)
+              Gallery (Comma Separated)
             </label>
             <input
               {...register("gallery")}
-              placeholder="url1, url2..."
               className="input bg-slate-50 border-slate-100 rounded-2xl font-bold h-14"
             />
           </div>
         </div>
 
-        {/* Full Width Fields */}
+        {/* Full Width */}
         <div className="md:col-span-2 space-y-6">
           <div className="form-control">
             <label className="label font-black text-[10px] uppercase text-slate-400 tracking-widest">
@@ -170,7 +188,6 @@ const AddService = () => {
             </label>
             <textarea
               {...register("features")}
-              placeholder="Premium lighting, Floral decor, Stage setup..."
               className="textarea bg-slate-50 border-slate-100 rounded-2xl font-bold h-24"
               required
             ></textarea>
@@ -188,25 +205,24 @@ const AddService = () => {
           </div>
         </div>
 
-        {/* Hidden/Automated Notice */}
-        <div className="md:col-span-2 flex items-center justify-between p-4 bg-teal-50 rounded-2xl border border-teal-100">
-          <p className="text-[10px] font-black text-teal-700 uppercase">
-            Registered Creator: {user?.email}
-          </p>
-          <p className="text-[10px] font-black text-teal-700 uppercase">
-            Default Rating: 5.0 ⭐
-          </p>
+        <div className="md:col-span-2 flex gap-4 mt-6">
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="flex-1 bg-slate-100 text-slate-500 font-black py-5 rounded-2xl hover:bg-slate-200 transition-all uppercase tracking-widest text-xs"
+          >
+            Discard Changes
+          </button>
+          <button
+            type="submit"
+            className="flex-2 bg-slate-900  hover:bg-primary text-white font-black py-5 rounded-2xl shadow-xl shadow-indigo-100 transition-all uppercase tracking-widest"
+          >
+            Save Changes
+          </button>
         </div>
-
-        <button
-          type="submit"
-          className="md:col-span-2 bg-slate-900 hover:bg-teal-700 text-white font-black py-5 rounded-2xl shadow-xl shadow-slate-200 transition-all uppercase tracking-widest"
-        >
-          Submit New Package
-        </button>
       </form>
     </div>
   );
 };
 
-export default AddService;
+export default UpdateServices;

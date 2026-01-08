@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layouts/RootLayout";
-import Home from "../Pages/Home/Home";
+// import Home from "../Pages/Home/Home";
 import Services from "../Pages/Services/Services";
 import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
@@ -30,6 +30,7 @@ import AddServices from "../Pages/Dashboard/AddServices";
 import ManageServices from "../Pages/Dashboard/ManageServices";
 
 import UpdateServices from "../Pages/Dashboard/UpdateServices";
+import Home from "../Pages/Home/Home";
 
 
 

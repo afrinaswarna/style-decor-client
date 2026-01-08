@@ -19,7 +19,7 @@ const ServiceDetails = () => {
   const [activeImg, setActiveImg] = useState(null);
   const {role} = useRole()
 
-  // 1. Fetch Service Coverage from Public Folder
+  
   const { data: areas = [] } = useQuery({
     queryKey: ["serviceCoverage"],
     queryFn: async () => {
@@ -28,7 +28,7 @@ const ServiceDetails = () => {
     },
   });
 
-  // 2. Fetch Service Details
+ 
   const { data: service = {}, isLoading } = useQuery({
     queryKey: ["service", id],
     queryFn: async () => {
@@ -37,10 +37,10 @@ const ServiceDetails = () => {
     },
   });
 
-  // Extract unique regions for the dropdown
+  
   const regions = [...new Set(areas.map((c) => c.region))];
 
-  // Watch selected region to filter districts
+  
   const selectedRegion = useWatch({ control, name: "region" });
 
   const districtByRegion = (regionName) => {
@@ -124,7 +124,7 @@ const ServiceDetails = () => {
                   src={img}
                   alt="gallery"
                   onClick={() => setActiveImg(i)}
-                  className={`h-24 w-24 flex-shrink-0 object-cover rounded-2xl cursor-pointer transition-all 
+                  className={`h-24 w-24 shrink-0 object-cover rounded-2xl cursor-pointer transition-all 
                   ${
                     activeImg === i
                       ? "ring-4 ring-teal-500 ring-offset-2"
@@ -155,7 +155,7 @@ const ServiceDetails = () => {
             {service.shortDescription}
           </p>
 
-          <div className="bg-slate-50 p-6 rounded-[2rem] border border-slate-100 mb-8 flex items-center justify-between">
+          <div className="bg-slate-50 p-6 rounded-4xl border border-slate-100 mb-8 flex items-center justify-between">
             <div>
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                 Pricing

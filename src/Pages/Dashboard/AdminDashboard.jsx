@@ -7,12 +7,12 @@ import {
   FaHourglassHalf,
   FaCircleCheck,
   FaUsers,
-  FaChartLine,
   FaMoneyBillTransfer,
   FaBoxArchive,
   FaSpinner,
   FaFileInvoiceDollar,
 } from "react-icons/fa6";
+import ServiceDemandChart from "./ServiceDemandChart";
 
 const getAdminCommissionRate = (category = "") => {
   const value = category.toLowerCase();
@@ -42,9 +42,6 @@ const AdminDashboard = () => {
 
   if (bLoading || uLoading) return <LoadingSpinner />;
 
-  // --- LOGIC SECTION ---
-
-  // 1. Filter Groups
   const paidBookings = bookings.filter((b) => b.paymentStatus === "paid");
   const completedBookings = bookings.filter(
     (b) => b.paymentStatus === "paid" && b.serviceStatus === "completed"
@@ -53,7 +50,6 @@ const AdminDashboard = () => {
     (b) => b.paymentStatus === "paid" && b.serviceStatus !== "completed"
   );
 
-  // 2. Financials
   const totalEscrow = processingBookings.reduce((sum, b) => sum + b.price, 0);
   const totalGrossRevenue = completedBookings.reduce(
     (sum, b) => sum + b.price,
@@ -68,7 +64,7 @@ const AdminDashboard = () => {
   return (
     <div className="space-y-10 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <header>
-        <h1 className="text-4xl font-black text-slate-900 italic tracking-tighter">
+        <h1 className="text-4xl font-black text-slate-900  tracking-tighter">
           Admin Dashboard
         </h1>
         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mt-2">
@@ -83,7 +79,7 @@ const AdminDashboard = () => {
             <div className="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center mb-4">
               <FaSackDollar />
             </div>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest text-teal-400">
+            <p className="text-[10px] font-black  uppercase tracking-widest text-teal-400">
               Net Profit (Admin)
             </p>
             <h3 className="text-4xl font-black mt-1">
@@ -119,7 +115,7 @@ const AdminDashboard = () => {
 
       {/* DETAILED PROJECT COUNTS GRID */}
       <div>
-        <h4 className="text-xl font-black italic mb-6 text-slate-800">
+        <h4 className="text-xl font-black  mb-6 text-slate-800">
           Pipeline Statistics
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -176,11 +172,13 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 mt-10">
+        <ServiceDemandChart bookings={bookings} />
+      </div>
 
-      {/* SETTLEMENT TABLE */}
       <section className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
         <div className="p-8 border-b border-slate-50">
-          <h3 className="text-xl font-black italic text-slate-800">
+          <h3 className="text-xl font-black  text-slate-800">
             Pending Settlements
           </h3>
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">

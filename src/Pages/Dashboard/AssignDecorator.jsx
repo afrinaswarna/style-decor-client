@@ -8,6 +8,7 @@ import {
   FaMapMarkerAlt,
   FaCheckCircle,
 } from "react-icons/fa";
+import LoadingSpinner from "../../components/Loading/LoadingSpinner";
 
 const AssignDecorator = () => {
   const axiosSecure = useAxiosSecure();
@@ -110,11 +111,7 @@ const AssignDecorator = () => {
   };
 
   if (isLoading)
-    return (
-      <div className="flex justify-center p-20">
-        <span className="loading loading-dots loading-lg text-primary"></span>
-      </div>
-    );
+    return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="p-4 md:p-8 bg-[#F8FAFC] min-h-screen">

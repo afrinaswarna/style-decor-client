@@ -8,6 +8,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { FaCheckCircle, FaStar } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import useRole from "../../hooks/useRole";
+import LoadingSpinner from "../../components/Loading/LoadingSpinner";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -93,11 +94,7 @@ const ServiceDetails = () => {
   };
 
   if (isLoading)
-    return (
-      <div className="flex justify-center my-20">
-        <span className="loading loading-spinner loading-lg text-teal-600"></span>
-      </div>
-    );
+    return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">

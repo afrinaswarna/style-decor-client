@@ -6,6 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { format } from "date-fns"; 
 import { FaCheckCircle, FaCreditCard, FaReceipt } from "react-icons/fa";
 import { FaCalendarDays } from "react-icons/fa6";
+import LoadingSpinner from "../../components/Loading/LoadingSpinner";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -20,11 +21,7 @@ const PaymentHistory = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[400px]">
-        <span className="loading loading-spinner loading-lg text-teal-600"></span>
-      </div>
-    );
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   return (

@@ -52,7 +52,7 @@ const DashboardLayout = () => {
         
         <div className="bg-white border-r border-slate-200 w-72 min-h-full flex flex-col justify-between py-6">
           <div>
-            {/* Sidebar Branding - Hidden on mobile as it's in navbar */}
+            
             <div className="px-8 mb-8 hidden lg:block">
               <h1 className="text-2xl font-black text-slate-800">Dashboard</h1>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Management Console</p>

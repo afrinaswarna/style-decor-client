@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import LoadingSpinner from "../../components/Loading/LoadingSpinner";
 
 const UpdateServices = () => {
   const { id } = useParams();
@@ -72,9 +73,7 @@ const UpdateServices = () => {
   };
 
   if (isLoading)
-    return (
-      <div className="text-center py-20 font-black italic">Loading Data...</div>
-    );
+    return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="p-8 md:p-12 bg-white rounded-[3rem] shadow-sm border border-slate-100 max-w-5xl mx-auto mt-10">

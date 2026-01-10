@@ -32,11 +32,7 @@ const DashboardLayout = () => {
                 <p className="text-xs font-bold text-slate-800 capitalize">{role} Panel</p>
                 
              </div>
-             <div className="avatar placeholder">
-                <div className="bg-primary text-white rounded-full w-10">
-                  <span className="text-xs">JD</span>
-                </div>
-             </div>
+             
           </div>
         </nav>
 

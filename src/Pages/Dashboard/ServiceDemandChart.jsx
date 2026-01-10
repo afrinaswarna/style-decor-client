@@ -13,7 +13,7 @@ const ServiceDemandChart = ({ bookings = [] }) => {
   
   const processData = () => {
     const counts = bookings.reduce((acc, booking) => {
-      const category = booking.serviceCategory || "Uncategorized";
+      const category = booking.serviceCategory ;
       acc[category] = (acc[category] || 0) + 1;
       return acc;
     }, {});

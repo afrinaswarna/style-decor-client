@@ -265,7 +265,7 @@ const ServiceDetails = () => {
 
                 <select
                   {...register("district", { required: true })}
-                  className="select select-bordered rounded-2xl h-[56px] font-bold text-slate-700"
+                  className="select select-bordered rounded-2xl h-14 font-bold text-slate-700"
                 >
                   <option value="" disabled selected>
                     District
@@ -289,7 +289,7 @@ const ServiceDetails = () => {
               </button>
               <button
                 type="submit"
-                className="flex-[2] bg-teal-600 hover:bg-teal-700 text-white font-black py-4 rounded-2xl shadow-lg transition-all"
+                className="flex-2 bg-teal-600 hover:bg-teal-700 text-white font-black py-4 rounded-2xl shadow-lg transition-all"
               >
                 Confirm Booking
               </button>

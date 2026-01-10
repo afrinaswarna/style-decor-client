@@ -122,6 +122,7 @@ const MyBookings = () => {
                   <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">
                     Service Status
                   </th>
+                 
                   <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">
                     Tracking
                   </th>
@@ -186,14 +187,14 @@ const MyBookings = () => {
                     <td className="px-6 py-6">
                       <div
                         className={`px-4 py-1.5 rounded-full border text-[10px] font-black uppercase tracking-widest w-fit flex items-center gap-2 ${getStatusStyle(
-                          booking.status || "pending"
+                          booking.serviceStatus
                         )}`}
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-                        {booking.status || "pending"}
+                        {booking.serviceStatus }
                       </div>
                     </td>
-
+                    
                     {/* Tracking ID */}
                     <td className="px-6 py-6">
                       {booking.trackingId ? (

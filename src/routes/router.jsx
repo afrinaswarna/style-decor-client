@@ -31,6 +31,7 @@ import ManageServices from "../Pages/Dashboard/ManageServices";
 
 import UpdateServices from "../Pages/Dashboard/UpdateServices";
 import Home from "../Pages/Home/Home";
+import ServiceCoverage from "../components/ServiceCoverage/ServiceCoverage";
 
 
 
@@ -60,6 +61,11 @@ export const router = createBrowserRouter([
       {
         path: "contact",
         Component: Contact,
+      },
+      {
+        path:'service-coverage',
+        element:<ServiceCoverage></ServiceCoverage>,
+        loader:()=>fetch("/serviceCoverage.json").then((res) => res.json())
       },
       {
         path: "decorator",

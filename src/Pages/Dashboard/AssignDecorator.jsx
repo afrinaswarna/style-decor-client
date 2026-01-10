@@ -105,7 +105,7 @@ const AssignDecorator = () => {
         });
       }
     } catch (e) {
-      Swal.fire("Error", "Assignment failed", "error",e);
+      Swal.fire("Error", "Assignment failed", "error", e);
     }
   };
 
@@ -149,6 +149,9 @@ const AssignDecorator = () => {
                   Service Details
                 </th>
                 <th className="text-slate-400 uppercase text-[10px] font-black tracking-widest">
+                  Customer Name
+                </th>
+                <th className="text-slate-400 uppercase text-[10px] font-black tracking-widest">
                   Location
                 </th>
                 <th className="text-slate-400 uppercase text-[10px] font-black tracking-widest">
@@ -173,6 +176,11 @@ const AssignDecorator = () => {
                       <span className="text-[10px] font-bold text-primary uppercase mt-1 tracking-wider">
                         {booking.serviceCategory}
                       </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-2 text-slate-600 font-medium">
+                      <span>{booking.userName}</span>
                     </div>
                   </td>
                   <td>

@@ -36,7 +36,7 @@ const ManageServices = () => {
   };
 
   return (
-    <div className="p-4 md:p-8 lg:p-12 max-w-7xl mx-auto">
+    <div className="p-2 md:p-8 lg:p-12 max-w-7xl mx-auto">
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 mb-10">
         <div>

@@ -20,9 +20,11 @@ const Services = () => {
     queryKey: ["services"],
     queryFn: async () => {
       const res = await axiosSecure.get("/services");
+      console.log(res.data)
       return res.data;
     },
   });
+  console.log(services)
 
   const serviceTypes = useMemo(() => {
     const types = services.map((service) => service.service_category);

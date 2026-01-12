@@ -18,9 +18,8 @@ const ServiceDetails = () => {
   const { user } = useAuth();
   const bookingModalRef = useRef(null);
   const [activeImg, setActiveImg] = useState(null);
-  const {role} = useRole()
+  const { role } = useRole();
 
-  
   const { data: areas = [] } = useQuery({
     queryKey: ["serviceCoverage"],
     queryFn: async () => {
@@ -29,7 +28,6 @@ const ServiceDetails = () => {
     },
   });
 
- 
   const { data: service = {}, isLoading } = useQuery({
     queryKey: ["service", id],
     queryFn: async () => {
@@ -38,10 +36,8 @@ const ServiceDetails = () => {
     },
   });
 
-  
   const regions = [...new Set(areas.map((c) => c.region))];
 
-  
   const selectedRegion = useWatch({ control, name: "region" });
 
   const districtByRegion = (regionName) => {
@@ -52,16 +48,24 @@ const ServiceDetails = () => {
   const handleOpenModal = () => bookingModalRef.current?.showModal();
   const handleCloseModal = () => bookingModalRef.current?.close();
 
+  const handleClick = () => {
+    if (user) {
+      handleOpenModal();
+    } else {
+      navigate("/login");
+    }
+  };
   const handleBookings = async (data) => {
     const booking = {
       userName: user?.displayName,
       userEmail: user?.email,
       serviceId: service._id,
       serviceName: service.service_name,
+      serviceCategory:service.service_category,
       price: service.cost,
-      location: data.location,
+      
       region: data.region,
-      district: data.district,
+      location: data.district,
       serviceStatus: "pending",
       createdAt: new Date(),
     };
@@ -93,8 +97,9 @@ const ServiceDetails = () => {
     });
   };
 
-  if (isLoading)
-    return <LoadingSpinner></LoadingSpinner>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
+  const canEditService =
+    role === "admin" || user?.email === service.createdByEmail;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
@@ -164,23 +169,26 @@ const ServiceDetails = () => {
                 </span>
               </p>
             </div>
-            {user?.email === service.createdByEmail || role === 'admin' ? (
+
+            <div className="flex gap-3">
+              {canEditService && (
+                <button
+                  onClick={() =>
+                    navigate(`/dashboard/update-service/${service._id}`)
+                  }
+                  className="bg-amber-500 hover:bg-amber-600 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-lg shadow-amber-100"
+                >
+                  Edit This Package
+                </button>
+              )}
+
               <button
-                onClick={() =>
-                  navigate(`/dashboard/update-service/${service._id}`)
-                }
-                className="bg-amber-500 hover:bg-amber-600 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-lg shadow-amber-100"
-              >
-                Edit This Package
-              </button>
-            ) : (
-              <button
-                onClick={handleOpenModal}
+                onClick={handleClick}
                 className="bg-slate-900 hover:bg-teal-700 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-lg shadow-slate-200"
               >
                 Book Service
               </button>
-            )}
+            </div>
           </div>
         </div>
       </div>
@@ -233,11 +241,16 @@ const ServiceDetails = () => {
                 className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl font-bold text-slate-400 text-sm cursor-not-allowed"
               />
               <input
+                defaultValue={user?.email}
+                readOnly
+                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl font-bold text-slate-400 text-sm cursor-not-allowed"
+              />
+              <input
                 defaultValue={service.service_name}
                 readOnly
                 className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl font-bold text-slate-400 text-sm cursor-not-allowed"
               />
-
+{/* 
               <div className="relative">
                 <FaLocationDot className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
@@ -246,12 +259,12 @@ const ServiceDetails = () => {
                   placeholder="Venue Address (House/Road/Area)"
                   className="w-full pl-12 pr-6 py-4 bg-white border border-slate-200 rounded-2xl focus:border-teal-500 outline-none font-bold text-sm shadow-sm transition-all"
                 />
-              </div>
+              </div> */}
 
               <div className="grid grid-cols-2 gap-4">
                 <select
                   {...register("region", { required: true })}
-                  className="select select-bordered rounded-2xl h-[56px] font-bold text-slate-700"
+                  className="select select-bordered rounded-2xl h-14 font-bold text-slate-700"
                 >
                   <option value="" disabled selected>
                     Region

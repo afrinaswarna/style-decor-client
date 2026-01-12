@@ -60,7 +60,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="sticky top-0 z-[100] bg-white/90 backdrop-blur-lg border-b border-slate-100 shadow-sm">
+    <div className="sticky top-0 z-100 bg-white/90 backdrop-blur-lg border-b border-slate-100 shadow-sm">
       <div className="max-w-7xl mx-auto navbar py-0 min-h-[72px] px-4 lg:px-8">
         {/* Navbar Start: Logo & Mobile Menu */}
         <div className="navbar-start">
@@ -87,12 +87,9 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <Link
-            to="/"
-            className="flex items-center hover:opacity-90 transition-opacity"
-          >
+          
             <Logo />
-          </Link>
+          
         </div>
 
         {/* Navbar Center: Desktop Links */}

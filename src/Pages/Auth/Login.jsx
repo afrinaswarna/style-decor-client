@@ -30,7 +30,8 @@ const Login = () => {
         });
         navigate(location.state || "/");
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e)
         Swal.fire({
           icon: "error",
           title: "Oops...",

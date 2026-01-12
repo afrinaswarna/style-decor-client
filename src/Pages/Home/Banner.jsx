@@ -90,7 +90,7 @@ const Banner = () => {
           >
             <Link
               to="/services"
-              className="bg-teal-500 text-slate-900 px-10 py-5 rounded-full font-black uppercase tracking-[0.2em] shadow-2xl shadow-teal-500/20 hover:bg-white transition-all"
+              className="bg-teal-500 text-slate-900 px-5 lg:px-10 py-5 rounded-full font-black uppercase tracking-[0.2em] shadow-2xl shadow-teal-500/20 hover:bg-white transition-all"
             >
               Book Decoration Service
             </Link>

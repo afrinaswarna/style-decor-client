@@ -10,7 +10,10 @@ import {
   FaCircleCheck,
 } from "react-icons/fa6";
 
-const getCommissionRate = (category = "") => {
+const getCommissionRate = (category) => {
+  // Add a check to ensure category exists before calling toLowerCase()
+  if (!category) return 0.5; 
+  
   const value = category.toLowerCase();
   if (value === "home service") return 0.6;
   if (value === "wedding") return 0.8;
@@ -43,7 +46,7 @@ const MyEarnings = () => {
     const rate = getCommissionRate(booking.serviceCategory);
     return sum + booking.price * rate;
   }, 0);
-
+  console.log(completedProjects)
   return (
     <div className="min-h-screen bg-slate-50/50 p-4 md:p-10">
       <div className="max-w-5xl mx-auto space-y-8">
@@ -130,7 +133,7 @@ const MyEarnings = () => {
                   >
                     <div className="flex gap-4 items-center">
                       <div className="h-12 w-12 rounded-xl bg-teal-50 flex items-center justify-center text-(--color-primary)] font-black">
-                        {booking.serviceCategory.charAt(0)}
+                        {booking?.serviceCategory?.charAt(0) || "?"}
                       </div>
                       <div>
                         <h4 className="font-bold text-slate-800 group-hover:text-(--color-primary)] transition-colors">

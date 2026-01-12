@@ -8,7 +8,7 @@ import useRole from '../hooks/useRole';
 const DashboardLayout = () => {
   const { role } = useRole();
 
-  // Active link style using your primary color
+  
   const activeLink = "bg-teal-50 text-[var(--color-primary)] font-bold border-r-4 border-[var(--color-primary)] rounded-none";
   const normalLink = "text-slate-600 hover:bg-slate-50 hover:text-[var(--color-primary)] transition-all duration-200 rounded-lg mx-2";
 
@@ -36,13 +36,13 @@ const DashboardLayout = () => {
           </div>
         </nav>
 
-        {/* Main Content Area */}
+        
         <main className="p-4 md:p-8 min-h-screen">
           <Outlet />
         </main>
       </div>
 
-      {/* Sidebar */}
+     
       <div className="drawer-side z-30">
         <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
         
@@ -55,7 +55,7 @@ const DashboardLayout = () => {
             </div>
 
             <ul className="menu p-0 space-y-1">
-              {/* Common Links */}
+             
               <p className="px-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-4">Main Menu</p>
               <li>
                 <NavLink to='/' className={({ isActive }) => isActive ? activeLink : normalLink}>
@@ -63,7 +63,7 @@ const DashboardLayout = () => {
                 </NavLink>
               </li>
 
-              {/* Decorator Specific Links */}
+              
               {role === "decorator" && (
                 <>
                   <p className="px-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-6">Workplace</p>
@@ -85,7 +85,7 @@ const DashboardLayout = () => {
                 </>
               )}
 
-              {/* User/Client Links */}
+              
               <p className="px-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-6">My Activity</p>
               <li>
                 <NavLink to='/dashboard/my-profile' className={({ isActive }) => isActive ? activeLink : normalLink}>

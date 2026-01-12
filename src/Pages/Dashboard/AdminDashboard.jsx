@@ -176,62 +176,123 @@ const AdminDashboard = () => {
         <ServiceDemandChart bookings={bookings} />
       </div>
 
-      <section className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
-        <div className="p-8 border-b border-slate-50">
-          <h3 className="text-xl font-black  text-slate-800">
-            Pending Settlements
-          </h3>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-            Payouts unlocked after service completion
-          </p>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="table w-full">
-            <thead>
-              <tr className="bg-slate-50/50">
-                <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-left">
-                  Decorator
-                </th>
-                <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-left">
-                  Category
-                </th>
-                <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">
-                  User Paid
-                </th>
-                <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">
-                  Decorator Share
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {completedBookings.map((b) => (
-                <tr
-                  key={b._id}
-                  className="border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors"
-                >
-                  <td className="p-6 text-sm font-bold text-slate-700">
-                    {b.decoratorEmail}
-                  </td>
-                  <td className="p-6 uppercase text-[9px] font-black text-indigo-500">
-                    {b.serviceCategory}
-                  </td>
-                  <td className="p-6 text-right font-black">
-                    ৳{b.price.toLocaleString()}
-                  </td>
-                  <td className="p-6 text-right font-black text-teal-600">
-                    ৳
-                    {(
-                      b.price *
-                      (1 - getAdminCommissionRate(b.serviceCategory))
-                    ).toLocaleString()}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+     <section className="bg-white rounded-[2rem] md:rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
+  {/* Header */}
+  <div className="p-6 md:p-8 border-b border-slate-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+    <div>
+      <h3 className="text-lg md:text-xl font-black text-slate-800">
+        Pending Settlements
+      </h3>
+      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+        Payouts unlocked after service completion
+      </p>
     </div>
+    <span className="badge badge-ghost font-bold text-[10px] uppercase">
+      {completedBookings.length} Projects
+    </span>
+  </div>
+
+  {/* DESKTOP TABLE */}
+  <div className="hidden md:block overflow-x-auto">
+    <table className=" table w-full">
+      <thead>
+        <tr className="bg-slate-50/50">
+          <th className="p-5 text-[10px] font-black text-slate-400 uppercase text-left">
+            Decorator
+          </th>
+          <th className="p-5 text-[10px] font-black text-slate-400 uppercase text-left">
+            Category
+          </th>
+          <th className="p-5 text-[10px] font-black text-slate-400 uppercase text-right">
+            User Paid
+          </th>
+          <th className="p-5 text-[10px] font-black text-slate-400 uppercase text-right">
+            Decorator Share
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {completedBookings.map((b) => {
+          const price = Number(b?.price) || 0;
+          const share =
+            price * (1 - getAdminCommissionRate(b?.serviceCategory));
+
+          return (
+            <tr
+              key={b._id}
+              className="border-b border-slate-50 last:border-0 hover:bg-slate-50/60 transition"
+            >
+              <td className="p-5 text-sm font-bold text-slate-700 truncate max-w-[220px]">
+                {b.decoratorEmail}
+              </td>
+              <td className="p-5 uppercase text-[9px] font-black text-indigo-500">
+                <span className="bg-indigo-50 px-2 py-1 rounded">
+                  {b.serviceCategory || "General"}
+                </span>
+              </td>
+              <td className="p-5 text-right font-black text-slate-600">
+                ৳{price.toLocaleString()}
+              </td>
+              <td className="p-5 text-right font-black text-teal-600">
+                ৳{share.toLocaleString()}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+
+  {/* MOBILE CARDS */}
+  <div className="sm:hidden divide-y divide-slate-50">
+    {completedBookings.map((b) => {
+      const price = Number(b?.price) || 0;
+      const share =
+        price * (1 - getAdminCommissionRate(b?.serviceCategory));
+
+      return (
+        <div
+          key={b._id}
+          className="p-5 space-y-4 hover:bg-slate-50 transition"
+        >
+          <div className="flex justify-between gap-4">
+            <div className="min-w-0">
+              <p className="text-[10px] font-black text-slate-400 uppercase">
+                Decorator
+              </p>
+              <p className="text-xs font-bold text-slate-700 truncate">
+                {b.decoratorEmail}
+              </p>
+            </div>
+            <span className="text-[9px] font-black text-indigo-500 uppercase bg-indigo-50 px-2 py-1 rounded h-fit">
+              {b.serviceCategory || "General"}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 bg-slate-50/80 p-4 rounded-2xl">
+            <div>
+              <p className="text-[9px] font-bold text-slate-400 uppercase">
+                Paid by User
+              </p>
+              <p className="font-bold text-slate-600">
+                ৳{price.toLocaleString()}
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-[9px] font-bold text-teal-500 uppercase">
+                Decorator Share
+              </p>
+              <p className="font-black text-teal-600 text-lg">
+                ৳{share.toLocaleString()}
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
+</div>
   );
 };
 
